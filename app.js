@@ -971,9 +971,9 @@ function getFreeAssistantReply(message) {
       ar: "في كثير من طلبات اعتماد النوع، يحتاج المصنع أو المورد الأجنبي إلى وكيل أو ممثل محلي للتعامل مع الإجراءات والمراسلات وتقديم المستندات. كونتيننتال تساعد في هذا الدور وتتابع الملف حتى صدور الشهادة.",
       en: "For many Type Approval applications, a foreign manufacturer or supplier needs a local representative to manage procedures, correspondence, and document submission. Continental can support this role and follow the file until certificate issuance.",
     },
-    companies: {
-      ar: "في مجال الموافقات النوعية عالمياً توجد جهات اختبار واعتماد واستشارات كبيرة مثل SGS، Intertek، Bureau Veritas، TÜV Rheinland، TÜV SÜD، DEKRA، UL Solutions، Eurofins، Element، Kiwa، Nemko، Cetecom/CTC advanced، Applus+، BSI، CSA Group، QIMA، TUV NORD، TUV AUSTRIA، Phoenix Testlab، و7layers. في اليمن، الشركات المحلية غالباً تكون وكلاء ومكاتب خدمات واستشارات تنظيمية، وكونتيننتال تركز على اعتماد النوع ودخول السوق اليمني ومتابعة الملف محلياً. تنبيه: أسماء الشركات ونطاق خدماتها وفروعها قد تتغير مع الوقت، لذلك يجب التحقق من الاعتماد أو التفويض الحالي قبل الاعتماد على أي جهة.",
-      en: "In global Type Approval, major testing, certification, and compliance organizations include SGS, Intertek, Bureau Veritas, TÜV Rheinland, TÜV SÜD, DEKRA, UL Solutions, Eurofins, Element, Kiwa, Nemko, Cetecom/CTC advanced, Applus+, BSI, CSA Group, QIMA, TUV NORD, TUV AUSTRIA, Phoenix Testlab, and 7layers. In Yemen, local providers are often agents, service offices, import-support firms, and regulatory consultants. Continental focuses on Type Approval, Yemen market access, and regulatory file follow-up. Note: company names, scopes, accreditations, and offices may change over time, so current authorization should always be verified.",
+    providerGuidance: {
+      ar: "لا أقدم قوائم بأسماء شركات أو مختبرات بعينها. لاختيار جهة مناسبة، ركز على نطاق الاعتماد الحالي، مطابقة الاختبارات للموديل نفسه، خبرة الجهة في السوق المستهدف، وضوح التقارير، وسهولة التحقق من التفويضات. ويمكن لكونتيننتال مساعدتك في مراجعة الملف وتحديد المتطلبات المناسبة لليمن.",
+      en: "I do not provide lists of specific companies or labs. To choose a suitable provider, focus on current accreditation scope, reports that match the exact model, experience in the target market, report clarity, and verifiable authorizations. Continental can help review the file and identify the right requirements for Yemen.",
     },
     process: {
       ar: "الخطوات العامة: نحدد نوع الجهاز والوجهة، نراجع الوثائق، نجهز نموذج الطلب وخطاب التفويض، نتحقق من تقارير الاختبار، نقدم الملف للجهة المختصة، نتابع الملاحظات، ثم نستلم الشهادة عند الموافقة.",
@@ -1052,8 +1052,8 @@ function getFreeAssistantReply(message) {
       en: "Note: This is general guidance, not an official decision. Requirements may vary by authority, region, product type, and submission date. For final confirmation, send us the device model and available documents.",
     },
     default: {
-      ar: "أنا كون ايليت، مساعد كونتيننتال لاعتماد النوع. أستطيع مساعدتك في اليمن والعالم: الجهات، الترددات، FCC، CE/RED، ISED، UKCA، الخليج، أفريقيا، آسيا، المختبرات، الشركات العالمية مثل SGS وIntertek وTÜV وUL وBureau Veritas، الوثائق، التجديد، وتقييم مخاطر الجهاز. ملاحظة مهمة: معلومات الترددات والمتطلبات قد تتغير مع الوقت ويجب تأكيدها رسمياً قبل الشحن أو التقديم.",
-      en: "I am Con Elite, Continental's Type Approval assistant. I can help with Yemen and global approvals: authorities, frequencies, FCC, CE/RED, ISED, UKCA, GCC, Africa, Asia, labs, global companies such as SGS, Intertek, TÜV, UL, and Bureau Veritas, documents, renewals, and device risk review. Important note: frequency and requirement information may change over time and must be officially confirmed before shipment or submission.",
+      ar: "أنا كون ايليت، مساعد كونتيننتال لاعتماد النوع. أستطيع مساعدتك في اليمن والعالم: الجهات، الترددات، FCC، CE/RED، ISED، UKCA، الخليج، أفريقيا، آسيا، المختبرات، الوثائق، التجديد، وتقييم مخاطر الجهاز. ملاحظة مهمة: معلومات الترددات والمتطلبات قد تتغير مع الوقت ويجب تأكيدها رسمياً قبل الشحن أو التقديم.",
+      en: "I am Con Elite, Continental's Type Approval assistant. I can help with Yemen and global approvals: authorities, frequencies, FCC, CE/RED, ISED, UKCA, GCC, Africa, Asia, labs, documents, renewals, and device risk review. Important note: frequency and requirement information may change over time and must be officially confirmed before shipment or submission.",
     },
   };
 
@@ -1072,7 +1072,7 @@ function getFreeAssistantReply(message) {
   else if (/standard|ce|red|emc|rf|safety|معيار|معايير|سلامة|توافق|كهرومغناطيسي|تردد/.test(text)) key = "standards";
   else if (/label|mark|ملصق|وسم|علامة/.test(text)) key = "labels";
     else if (/representative|agent|local|وكيل|ممثل|محلي/.test(text)) key = "localRep";
-  else if (/company|companies|manufacturer|importer|distributor|operator|sgs|intertek|tuv|tüv|bureau veritas|ul solutions|dekra|eurofins|element|kiwa|nemko|cetecom|applus|bsi|csa|qima|شركة|شركات|مصنع|مصنعين|مستورد|موزع|مختبرات|جهات اعتماد|تي يو في|انترتك|بيرو فيريتاس|اس جي اس/.test(text)) key = "companies";
+  else if (/company|companies|provider|providers|lab|labs|manufacturer|importer|distributor|operator|شركة|شركات|مزود|مزودين|مصنع|مصنعين|مستورد|موزع|مختبرات|جهات اعتماد/.test(text)) key = "providerGuidance";
   else if (/process|steps|procedure|خطوات|اجراءات|إجراءات|طريقة/.test(text)) key = "process";
   else if (/5g|4g|lte|gsm|umts|nfc|rfid|lora|zigbee|تقنية|تقنيات/.test(text)) key = "technologies";
   else if (/global|world|international|worldwide|homologation|gma|عالمي|العالم|دولي|دولية|الموافقات النوعية العالمية/.test(text)) key = "globalMarket";
