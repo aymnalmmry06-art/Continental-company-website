@@ -1409,6 +1409,28 @@
       <i class="fab fa-whatsapp"></i><span>WhatsApp</span>
     </a>
 
+    <div class="connection-overlay" id="connectionOverlay" aria-live="polite">
+      <div class="connection-card">
+        <div class="connection-icon" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <h2 id="connectionTitleAr">لا يوجد اتصال بالإنترنت</h2>
+        <p id="connectionTextAr">
+          يبدو أن الاتصال غير متوفر الآن. لا تقلق، سنعيد المحاولة فور عودة الشبكة.
+        </p>
+        <h3 id="connectionTitleEn">You are offline</h3>
+        <p id="connectionTextEn">
+          It looks like your internet connection is unavailable. No worries, we will reconnect as soon as the network returns.
+        </p>
+        <button type="button" id="connectionRetryBtn">
+          <i class="fas fa-rotate-right"></i>
+          <span>إعادة المحاولة / Retry</span>
+        </button>
+      </div>
+    </div>
+
     <script defer src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script defer src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
     <script defer src="app.js"></script>

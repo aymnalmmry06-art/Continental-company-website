@@ -30,6 +30,97 @@ if (typeof firebase !== "undefined" && typeof firebase.database === "function") 
 }
 
 let currentLang = "en";
+let slowConnectionTimer = null;
+
+function updateConnectionCopy(mode) {
+  const titleAr = document.getElementById("connectionTitleAr");
+  const textAr = document.getElementById("connectionTextAr");
+  const titleEn = document.getElementById("connectionTitleEn");
+  const textEn = document.getElementById("connectionTextEn");
+
+  if (!titleAr || !textAr || !titleEn || !textEn) return;
+
+  if (mode === "slow") {
+    titleAr.textContent = "الاتصال بطيء حالياً";
+    textAr.textContent =
+      "يبدو أن الشبكة متعبة قليلاً. سنواصل المحاولة بهدوء حتى يكتمل تحميل الموقع.";
+    titleEn.textContent = "The connection is slow";
+    textEn.textContent =
+      "Your network seems a little slow. We will keep trying gently until the site finishes loading.";
+    return;
+  }
+
+  titleAr.textContent = "لا يوجد اتصال بالإنترنت";
+  textAr.textContent =
+    "يبدو أن الاتصال غير متوفر الآن. لا تقلق، سنعيد المحاولة فور عودة الشبكة.";
+  titleEn.textContent = "You are offline";
+  textEn.textContent =
+    "It looks like your internet connection is unavailable. No worries, we will reconnect as soon as the network returns.";
+}
+
+function showConnectionOverlay(mode = "offline") {
+  const overlay = document.getElementById("connectionOverlay");
+  if (!overlay) return;
+
+  updateConnectionCopy(mode);
+  overlay.classList.add("is-visible");
+  overlay.setAttribute("aria-hidden", "false");
+}
+
+function hideConnectionOverlay() {
+  const overlay = document.getElementById("connectionOverlay");
+  if (!overlay) return;
+
+  overlay.classList.remove("is-visible");
+  overlay.setAttribute("aria-hidden", "true");
+}
+
+function setupConnectionMonitor() {
+  const retryBtn = document.getElementById("connectionRetryBtn");
+
+  if (retryBtn) {
+    retryBtn.addEventListener("click", () => {
+      if (navigator.onLine) {
+        window.location.reload();
+      } else {
+        showConnectionOverlay("offline");
+      }
+    });
+  }
+
+  if (!navigator.onLine) {
+    showConnectionOverlay("offline");
+  }
+
+  window.addEventListener("offline", () => showConnectionOverlay("offline"));
+  window.addEventListener("online", () => {
+    hideConnectionOverlay();
+    showToast(
+      currentLang === "ar"
+        ? "عاد الاتصال بالإنترنت"
+        : "Internet connection restored",
+    );
+  });
+
+  slowConnectionTimer = window.setTimeout(() => {
+    if (document.readyState !== "complete" && navigator.onLine) {
+      showConnectionOverlay("slow");
+    }
+  }, 9000);
+
+  window.addEventListener("load", () => {
+    window.clearTimeout(slowConnectionTimer);
+    if (navigator.onLine) hideConnectionOverlay();
+  });
+}
+
+function registerServiceWorker() {
+  if (!("serviceWorker" in navigator)) return;
+
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js").catch(() => {});
+  });
+}
 
 function setTranslatedContent(el, value) {
   if (!el || !value) return;
@@ -1004,3 +1095,6 @@ function getFreeAssistantReply(message) {
 
   return replies[key][isArabic ? "ar" : "en"];
 }
+
+setupConnectionMonitor();
+registerServiceWorker();
