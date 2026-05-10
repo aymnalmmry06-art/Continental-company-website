@@ -39,6 +39,19 @@ function setTranslatedContent(el, value) {
     return;
   }
 
+  if (el.children.length) {
+    const textNode = Array.from(el.childNodes).find(
+      (node) => node.nodeType === Node.TEXT_NODE && node.textContent.trim(),
+    );
+
+    if (textNode) {
+      textNode.textContent = ` ${value}`;
+    } else {
+      el.appendChild(document.createTextNode(value));
+    }
+    return;
+  }
+
   el.textContent = value;
 }
 
@@ -335,7 +348,7 @@ function createNewsCard(item) {
   const share = document.createElement("button");
   share.type = "button";
   share.className = "news-action";
-  share.innerHTML = `<i class="fas fa-share-nodes"></i><span>${currentLang === "ar" ? "مشاركة" : "Share"}</span>`;
+  share.innerHTML = `<i class="fas fa-share-alt"></i><span>${currentLang === "ar" ? "مشاركة" : "Share"}</span>`;
   share.addEventListener("click", () => shareNewsItem(item));
   actions.appendChild(share);
 

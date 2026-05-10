@@ -3709,3 +3709,150 @@ body.light .hero-btns .btn[style*="transparent"] {
     animation-duration: 0.01ms !important;
   }
 }
+
+/* =========================================================
+   SECTION + ICON CONSISTENCY FIXES
+   Keeps cards, icons, and mode colors stable across languages.
+   ========================================================= */
+section:not(.hero) {
+  background: transparent;
+}
+
+#news,
+#about,
+#why-us,
+#services,
+#requirements,
+#global-approval,
+#faq,
+#contact {
+  position: relative;
+}
+
+#news::after,
+#about::after,
+#why-us::after,
+#services::after,
+#requirements::after,
+#global-approval::after,
+#faq::after,
+#contact::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(79, 124, 255, 0.035), transparent 38%),
+    linear-gradient(0deg, rgba(0, 210, 255, 0.025), transparent 46%);
+  opacity: 0.75;
+  z-index: -1;
+}
+
+body.light #news::after,
+body.light #about::after,
+body.light #why-us::after,
+body.light #services::after,
+body.light #requirements::after,
+body.light #global-approval::after,
+body.light #faq::after,
+body.light #contact::after {
+  background:
+    linear-gradient(180deg, rgba(79, 124, 255, 0.055), transparent 40%),
+    linear-gradient(0deg, rgba(0, 210, 255, 0.045), transparent 50%);
+}
+
+.card,
+.news-card,
+.contact-container,
+.about-image,
+.faq-item,
+.approval-region,
+.global-insight-card,
+.frequency-matrix,
+.global-proof-panel,
+.matrix-wrap {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.085), rgba(255, 255, 255, 0.04)),
+    var(--card-bg) !important;
+  border: 1px solid var(--line-soft) !important;
+  color: var(--text);
+}
+
+body.light .card,
+body.light .news-card,
+body.light .contact-container,
+body.light .about-image,
+body.light .faq-item,
+body.light .approval-region,
+body.light .global-insight-card,
+body.light .frequency-matrix,
+body.light .global-proof-panel,
+body.light .matrix-wrap {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(247, 250, 255, 0.94)),
+    #ffffff !important;
+  color: #15224a;
+}
+
+.card > i,
+.about-image > i,
+.contact-item > i,
+.approval-region > i,
+.news-empty-state > i {
+  width: 68px;
+  height: 68px;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 22px;
+  border-radius: 20px;
+  background:
+    linear-gradient(135deg, rgba(79, 124, 255, 0.2), rgba(0, 210, 255, 0.12));
+  color: var(--primary) !important;
+  -webkit-text-fill-color: currentColor !important;
+  filter: none !important;
+  line-height: 1;
+}
+
+body.light .card > i,
+body.light .about-image > i,
+body.light .contact-item > i,
+body.light .approval-region > i,
+body.light .news-empty-state > i {
+  background:
+    linear-gradient(135deg, rgba(79, 124, 255, 0.12), rgba(0, 210, 255, 0.1));
+  color: #3158c9 !important;
+}
+
+.card:hover > i,
+.about-image:hover > i,
+.contact-item:hover > i,
+.approval-region:hover > i {
+  color: #ffffff !important;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+}
+
+[dir="rtl"] .about-feature-item,
+[dir="rtl"] .news-action,
+[dir="rtl"] .btn,
+[dir="rtl"] .quote-btn-nav,
+[dir="rtl"] .contact-item {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .footer-links i,
+[dir="rtl"] .footer-contact i {
+  margin-left: 10px !important;
+  margin-right: 0 !important;
+  transform: rotate(180deg);
+}
+
+.about-feature-item i,
+.faq-question i,
+.news-action i,
+.btn i,
+.quote-btn-nav i,
+.footer-links i,
+.footer-contact i {
+  flex: 0 0 auto;
+}
