@@ -1,0 +1,1416 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Continental for Business Completion Services: The leading agency for MTIT Type Approval and regulatory compliance in Yemen since 2021."
+    />
+    <meta
+      name="keywords"
+      content="Type Approval Yemen, MTIT, Continental, Telecommunications Yemen"
+    />
+    <meta
+      property="og:title"
+      content="Continental | The Gold Standard for Type Approval in Yemen"
+    />
+    <meta property="og:image" content="logo.png" />
+    <meta name="theme-color" content="#0f1b4d" />
+
+    <title>Continental | The Gold Standard for Type Approval in Yemen</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Noto+Kufi+Arabic:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script defer src="https://cdn.jsdelivr.net/npm/dompurify@3.0.8/dist/purify.min.js"></script>
+  </head>
+
+  <body>
+    <div id="toast-container"></div>
+
+    <div id="logo-overlay">
+      <img src="logo.png" alt="Logo" class="intro-logo" decoding="async" />
+    </div>
+
+    <div id="preloader">
+      <div class="skeleton skeleton-title"></div>
+      <div class="skeleton skeleton-text"></div>
+      <div class="skeleton skeleton-text" style="width: 60%"></div>
+      <div style="display: flex; gap: 15px; margin-top: 10px">
+        <div class="skeleton" style="width: 140px; height: 45px"></div>
+        <div class="skeleton" style="width: 140px; height: 45px"></div>
+      </div>
+      <div class="cards" style="margin-top: 30px">
+        <div class="skeleton skeleton-box"></div>
+        <div class="skeleton skeleton-box"></div>
+        <div class="skeleton skeleton-box"></div>
+      </div>
+    </div>
+
+    <header>
+      <a href="#" class="logo">
+        <img src="logo.png" alt="Continental Logo" />
+        <span
+          class="company-name-text"
+          data-en="Continental for Business Completion Services"
+          data-ar="كونتيننتال لخدمات إنجاز الأعمال"
+          >Continental for Business Completion Services</span
+        >
+      </a>
+      <div class="nav-right">
+        <nav id="navbar">
+          <a
+            href="#news"
+            onclick="toggleMenu()"
+            data-en="News"
+            data-ar="الأخبار"
+            >News</a
+          >
+          <a
+            href="#about"
+            onclick="toggleMenu()"
+            data-en="About"
+            data-ar="من نحن"
+            >About</a
+          >
+          <a
+            href="#why-us"
+            onclick="toggleMenu()"
+            data-en="Why Us"
+            data-ar="لماذا نحن"
+            >Why Us</a
+          >
+          <a
+            href="#services"
+            onclick="toggleMenu()"
+            data-en="Services"
+            data-ar="خدماتنا"
+            >Services</a
+          >
+          <a
+            href="#requirements"
+            onclick="toggleMenu()"
+            data-en="Requirements"
+            data-ar="المتطلبات"
+            >Requirements</a
+          >
+          <a
+            href="#global-approval"
+            onclick="toggleMenu()"
+            data-en="Yemen Type Approval"
+            data-ar="اعتماد النوع في اليمن"
+            >Yemen Type Approval</a
+          >
+          <a
+            href="#faq"
+            onclick="toggleMenu()"
+            data-en="FAQ"
+            data-ar="الأسئلة الشائعة"
+            >FAQ</a
+          >
+          <a
+            href="#contact"
+            onclick="toggleMenu()"
+            data-en="Contact"
+            data-ar="اتصل بنا"
+            >Contact</a
+          >
+
+          <a
+            href="javascript:void(0)"
+            onclick="
+              openModal();
+              toggleMenu();
+            "
+            style="display: none"
+            class="quote-btn-nav mobile-quote-fix"
+            data-en="Request a Quote"
+            data-ar="طلب تسعيرة"
+          >
+            Request a Quote
+          </a>
+        </nav>
+
+        <button
+          class="quote-btn-nav"
+          onclick="openModal()"
+          data-en="Request a Quote"
+          data-ar="طلب تسعيرة"
+        >
+          Request a Quote
+        </button>
+
+        <div class="lang-btn" onclick="toggleLanguage()" id="lang-btn">AR</div>
+
+        <div class="toggle-btn" onclick="toggleMode()">
+          <i class="fas fa-moon" id="theme-icon"></i>
+        </div>
+        <div class="menu-btn" onclick="toggleMenu()">
+          <i class="fas fa-bars" id="menu-icon"></i>
+        </div>
+      </div>
+    </header>
+
+    <div class="modal" id="quoteModal">
+      <div class="modal-content" id="quoteModalContent">
+        <span class="close-modal" onclick="closeModal()">×</span>
+        <h3
+          style="color: var(--primary); margin-bottom: 20px"
+          data-en="Request a Quote"
+          data-ar="طلب تسعيرة"
+        >
+          Request a Quote
+        </h3>
+        <p
+          style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 20px"
+          data-en="Provide the following details to receive a professional price offer for your equipment."
+          data-ar="يرجى تقديم التفاصيل التالية للحصول على عرض سعر احترافي لمعداتك."
+        >
+          Provide the following details to receive a professional price offer
+          for your equipment.
+        </p>
+        <form
+          id="quoteForm"
+          action="https://formspree.io/f/mjglwple"
+          method="POST"
+          onsubmit="handleFormSubmit(event)"
+        >
+          <div style="margin-bottom: 15px">
+            <label
+              style="
+                display: block;
+                font-size: 0.85rem;
+                margin-bottom: 5px;
+                opacity: 0.8;
+              "
+              data-en="Company Details"
+              data-ar="تفاصيل الشركة"
+              >Company Details</label
+            >
+            <input
+              type="text"
+              name="company"
+              placeholder="Full Company Name"
+              data-en-placeholder="Full Company Name"
+              data-ar-placeholder="اسم الشركة الكامل"
+              required
+              class="admin-input"
+            />
+          </div>
+          <div style="margin-bottom: 15px">
+            <label
+              style="
+                display: block;
+                font-size: 0.85rem;
+                margin-bottom: 5px;
+                opacity: 0.8;
+              "
+              data-en="Equipment Info"
+              data-ar="معلومات المعدات"
+              >Equipment Info</label
+            >
+            <input
+              type="text"
+              name="device"
+              placeholder="Device Model / Brand"
+              data-en-placeholder="Device Model / Brand"
+              data-ar-placeholder="موديل / علامة الجهاز"
+              required
+              class="admin-input"
+            />
+          </div>
+          <div style="margin-bottom: 15px">
+            <label
+              style="
+                display: block;
+                font-size: 0.85rem;
+                margin-bottom: 5px;
+                opacity: 0.8;
+              "
+              data-en="Required Service"
+              data-ar="الخدمة المطلوبة"
+              >Required Service</label
+            >
+            <select
+              name="service"
+              required
+              style="background: #1a2556"
+              class="admin-input"
+            >
+              <option
+                value=""
+                disabled
+                selected
+                data-en="Select Service Type"
+                data-ar="اختر نوع الخدمة"
+              >
+                Select Service Type
+              </option>
+              <option
+                value="Type Approval"
+                data-en="Full Type Approval"
+                data-ar="اعتماد نوع كامل"
+              >
+                Full Type Approval
+              </option>
+              <option
+                value="Renewal"
+                data-en="Certificate Renewal"
+                data-ar="تجديد شهادة"
+              >
+                Certificate Renewal
+              </option>
+              <option
+                value="Consulting"
+                data-en="Compliance Consulting"
+                data-ar="استشارات الامتثال"
+              >
+                Compliance Consulting
+              </option>
+            </select>
+          </div>
+          <div style="margin-bottom: 25px">
+            <label
+              style="
+                display: block;
+                font-size: 0.85rem;
+                margin-bottom: 5px;
+                opacity: 0.8;
+              "
+              data-en="Contact Email"
+              data-ar="البريد الإلكتروني للتواصل"
+              >Contact Email</label
+            >
+            <input
+              type="email"
+              name="email"
+              placeholder="business@example.com"
+              data-en-placeholder="business@example.com"
+              data-ar-placeholder="business@example.com"
+              required
+              class="admin-input"
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn"
+            style="width: 100%; padding: 16px; font-size: 1rem"
+            data-en="Send Quote Request"
+            data-ar="إرسال طلب التسعيرة"
+          >
+            Send Quote Request
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div id="storyModal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal" onclick="closeStory()">×</span>
+        <img
+          id="storyImg"
+          src=""
+          style="
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            display: none;
+            object-fit: cover;
+          "
+        />
+        <h2
+          id="storyTitle"
+          style="color: var(--primary); margin-bottom: 15px"
+        ></h2>
+        <div
+          id="storyContent"
+          style="white-space: pre-wrap; line-height: 1.8; opacity: 0.9"
+        ></div>
+      </div>
+    </div>
+
+    <div id="backToTop"><i class="fas fa-arrow-up"></i></div>
+
+    <main id="main-content" style="visibility: hidden">
+      <section class="hero">
+        <div class="hero-text reveal">
+          <h1
+            data-en="The Gold Standard for Type Approval in Yemen"
+            data-ar="المعيار الذهبي لـ اعتماد النوع في اليمن"
+          >
+            The Gold Standard for <br /><span>Type Approval in Yemen</span>
+          </h1>
+          <p
+            data-en="Expert Type Approval and regulatory compliance services since 2021. Bridging global manufacturers with the local requirements of Yemen."
+            data-ar="خدمات احترافية في اعتماد النوع والامتثال التنظيمي منذ عام 2021. نربط المصنعين العالميين بالمتطلبات المحلية في اليمن."
+          >
+            Expert Type Approval and regulatory compliance services since 2021.
+            Bridging global manufacturers with the local requirements of Yemen.
+          </p>
+          <div class="hero-btns">
+            <a
+              href="javascript:void(0)"
+              class="btn"
+              onclick="openModal()"
+              data-en="Secure Your Approval"
+              data-ar="احصل على اعتمادك"
+              >Secure Your Approval</a
+            >
+            <a
+              href="#about"
+              class="btn"
+              style="
+                background: transparent;
+                border: 2px solid var(--primary);
+                color: var(--primary);
+              "
+              data-en="Learn More"
+              data-ar="تعرف علينا"
+              >Learn More</a
+            >
+          </div>
+          <div class="stats reveal">
+            <div class="stat">
+              <h2 class="counter" data-target="700">0</h2>
+              <p data-en="Certificates Issued" data-ar="شهادة صادرة">
+                Certificates Issued
+              </p>
+            </div>
+            <div class="stat">
+              <h2 class="counter" data-target="50">0</h2>
+              <p data-en="Major Manufacturers" data-ar="شركة مصنعة كبرى">
+                Major Manufacturers
+              </p>
+            </div>
+            <div class="stat">
+              <h2 class="counter" data-target="100">0</h2>
+              <p data-en="Success Rate %" data-ar="نسبة النجاح %">
+                Success Rate %
+              </p>
+            </div>
+            <div class="stat">
+              <h2 class="counter" data-target="5">0</h2>
+              <p data-en="Years of Expertise" data-ar="سنوات خبرة">
+                Years of Expertise
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="slider-container reveal">
+          <div class="slide active"><img src="form.jpg" alt="Form" /></div>
+          <div class="slide"><img src="ministry.png" alt="Ministry" /></div>
+        </div>
+      </section>
+
+      <section id="news">
+        <div class="section-title news-heading reveal">
+          <span class="section-kicker" data-en="Media Center" data-ar="المركز الإعلامي">Media Center</span>
+          <h2 data-en="Latest News & Company Updates" data-ar="آخر الأخبار وتحديثات الشركة">
+            Latest News & Company Updates
+          </h2>
+        </div>
+        <div id="news-container" class="news-grid reveal">
+          <div class="news-empty-state news-loading-state">
+            <i class="fas fa-circle-notch fa-spin"></i>
+            <strong data-en="Loading news..." data-ar="جاري تحميل الأخبار">Loading news...</strong>
+          </div>
+        </div>
+      </section>
+
+      <section id="about">
+        <div class="section-title reveal">
+          <h2 data-en="About Us" data-ar="من نحن">About Us</h2>
+          <div></div>
+        </div>
+        <div class="about-container reveal">
+          <div class="about-content">
+            <h3
+              data-en="Empowering Business Excellence in Yemen"
+              data-ar="تمكين التميز التجاري في اليمن"
+            >
+              Empowering Business Excellence in Yemen
+            </h3>
+            <p
+              style="margin: 20px 0"
+              data-allow-html="true"
+              data-en="Continental for Business Completion Services specializes in <strong>Type Approval</strong> and regulatory compliance. Since our establishment in 2021, we have been the primary bridge between international technology leaders and the Yemeni Ministry of Telecommunications."
+              data-ar="تتخصص كونتيننتال لخدمات إنجاز الأعمال في <strong>اعتماد النوع</strong> والامتثال التنظيمي. منذ تأسيسنا في عام 2021، كنا الجسر الأساسي بين قادة التكنولوجيا العالميين ووزارة الاتصالات اليمنية."
+            >
+              Continental for Business Completion Services specializes in
+              <strong>Type Approval</strong> and regulatory compliance.
+            </p>
+            <p
+              data-en="Our mission is to simplify the complex regulatory landscape, ensuring that your communication and wireless equipment reaches the Yemeni market without legal or technical delays."
+              data-ar="مهمتنا هي تبسيط المشهد التنظيمي المعقد، لضمان وصول معدات الاتصالات واللاسلكي الخاصة بك إلى السوق اليمنية دون تأخير قانوني أو تقني."
+            >
+              Our mission is to simplify the complex regulatory landscape,
+              ensuring that your communication and wireless equipment reaches
+              the Yemeni market without legal or technical delays.
+            </p>
+            <div class="about-features">
+              <div
+                class="about-feature-item"
+                data-en="Local Expertise"
+                data-ar="خبرة محلية"
+              >
+                <i class="fas fa-check-double"></i> Local Expertise
+              </div>
+              <div
+                class="about-feature-item"
+                data-en="Fast Processing"
+                data-ar="معالجة سريعة"
+              >
+                <i class="fas fa-bolt"></i> Fast Processing
+              </div>
+              <div
+                class="about-feature-item"
+                data-en="Official Support"
+                data-ar="دعم رسمي"
+              >
+                <i class="fas fa-shield-halved"></i> Official Support
+              </div>
+              <div
+                class="about-feature-item"
+                data-en="24/7 Consulting"
+                data-ar="استشارات 24/7"
+              >
+                <i class="fas fa-headset"></i> 24/7 Consulting
+              </div>
+            </div>
+          </div>
+          <div class="about-image">
+            <i class="fas fa-landmark-flag"></i>
+            <h3
+              style="margin-top: 20px; color: var(--primary)"
+              data-en="Since 2021"
+              data-ar="منذ 2021"
+            >
+              Since 2021
+            </h3>
+            <p
+              style="font-size: 0.9rem; opacity: 0.7"
+              data-en="Leading Agency in Sana'a"
+              data-ar="الوكالة الرائدة في صنعاء"
+            >
+              Leading Agency in Sana'a
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="why-us"
+        style="padding: 100px 20px; background: var(--bg-alt)"
+      >
+        <div class="section-title reveal">
+          <h2
+            data-en="Why Choose Continental?"
+            data-ar="لماذا تختار كونتيننتال؟"
+          >
+            Why Choose Continental?
+          </h2>
+          <p
+            style="margin-top: 10px; opacity: 0.8"
+            data-en="Your trusted strategic partner in the Yemeni market"
+            data-ar="شريكك الاستراتيجي الموثوق في السوق اليمني"
+          >
+            Your trusted strategic partner in the Yemeni market
+          </p>
+          <div></div>
+        </div>
+        <div class="cards" style="margin-top: 50px">
+          <div
+            class="card reveal"
+            style="text-align: center; background: var(--card-bg)"
+          >
+            <i class="fas fa-microchip"></i>
+            <h3
+              data-en="Unmatched Technical Expertise"
+              data-ar="خبرة فنية لا تُضاهى"
+            >
+              Unmatched Technical Expertise
+            </h3>
+            <p
+              data-en="Our team deeply understands MTIT technical standards, ensuring your high-tech devices meet local compliance from the first submission."
+              data-ar="يفهم فريقنا بعمق المعايير الفنية لوزارة الاتصالات، مما يضمن امتثال أجهزتكم عالية التقنية منذ التقديم الأول."
+            >
+              Our team deeply understands MTIT technical standards.
+            </p>
+          </div>
+          <div
+            class="card reveal"
+            style="text-align: center; background: var(--card-bg)"
+          >
+            <i class="fas fa-handshake"></i>
+            <h3
+              data-en="Trusted Government Relations"
+              data-ar="علاقات حكومية موثوقة"
+            >
+              Trusted Government Relations
+            </h3>
+            <p
+              data-en="Years of professional collaboration with regulatory bodies have built a foundation of trust that speeds up administrative procedures."
+              data-ar="سنوات من التعاون المهني مع الجهات التنظيمية بنت أساساً من الثقة يسرّع الإجراءات الإدارية بشكل كبير."
+            >
+              Years of professional collaboration speed up administrative
+              procedures.
+            </p>
+          </div>
+          <div
+            class="card reveal"
+            style="text-align: center; background: var(--card-bg)"
+          >
+            <i class="fas fa-clock-rotate-left"></i>
+            <h3 data-en="Record Processing Times" data-ar="سرعة إنجاز قياسية">
+              Record Processing Times
+            </h3>
+            <p
+              data-en="We value your 'Time-to-Market'. Our optimized workflow minimizes delays, getting your products licensed faster than industry averages."
+              data-ar="نحن ندرك قيمة وقتك؛ لذا صممنا سير عمل يحسن النتائج ويقلل التأخير، لنحصل على تراخيص منتجاتك بأرسع وقت ممكن."
+            >
+              Our optimized workflow minimizes delays and speeds up licensing.
+            </p>
+          </div>
+          <div
+            class="card reveal"
+            style="text-align: center; background: var(--card-bg)"
+          >
+            <i class="fas fa-shield-halved"></i>
+            <h3 data-en="Guaranteed Compliance" data-ar="امتثال مضمون">
+              Guaranteed Compliance
+            </h3>
+            <p
+              data-en="With a 100% success rate, we protect your brand's reputation by ensuring every device is fully legal and compliant with Yemeni law."
+              data-ar="بنسبة نجاح بلغت 100%، نحمي سمعة علامتك التجارية من خلال ضمان أن كل جهاز قانوني تماماً ومتوافق مع القانون اليمني."
+            >
+              We protect your brand's reputation with guaranteed legal
+              compliance.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="services">
+        <div class="section-title reveal">
+          <h2 data-en="Our Solutions" data-ar="حلولنا">Our Solutions</h2>
+          <div></div>
+        </div>
+        <div class="cards">
+          <div class="card reveal">
+            <i class="fas fa-certificate"></i>
+            <h3 data-en="Type Approval" data-ar="اعتماد النوع">
+              Type Approval
+            </h3>
+            <p
+              data-en="Full certification and licensing for all wireless, satellite, and telecommunication equipment entering Yemen."
+              data-ar="إصدار الشهادات والتراخيص الكاملة لجميع معدات اللاسلكي والأقمار الصناعية والاتصالات الداخلة إلى اليمن."
+            >
+              Full certification and licensing for all wireless, satellite, and
+              telecommunication equipment entering Yemen.
+            </p>
+          </div>
+          <div class="card reveal">
+            <i class="fas fa-user-shield"></i>
+            <h3 data-en="Compliance Consulting" data-ar="استشارات الامتثال">
+              Compliance Consulting
+            </h3>
+            <p
+              data-en="Pre-submission technical review to ensure your products meet MTIT standards and local safety requirements."
+              data-ar="مراجعة فنية قبل التقديم لضمان تلبية منتجاتك لمعايير وزارة الاتصالات ومتطلبات السلامة المحلية."
+            >
+              Pre-submission technical review to ensure your products meet MTIT
+              standards and local safety requirements.
+            </p>
+          </div>
+          <div class="card reveal">
+            <i class="fas fa-chart-line"></i>
+            <h3 data-en="Market Access" data-ar="دخول السوق">Market Access</h3>
+            <p
+              data-en="Comprehensive support for local documentation, Arabic manual requirements, and market-readiness follow-up."
+              data-ar="دعم شامل للوثائق المحلية، ومتطلبات الكتيبات باللغة العربية، ومتابعة جاهزية الملف للسوق."
+            >
+              Comprehensive support for local documentation, Arabic manual
+              requirements, and market-readiness follow-up.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="requirements" style="background: rgba(79, 124, 255, 0.03)">
+        <div class="section-title reveal">
+          <h2 data-en="Application Requirements" data-ar="متطلبات التقديم">
+            Application Requirements
+          </h2>
+          <p
+            style="margin-top: 10px; opacity: 0.8"
+            data-en="Essential documentation for successful submission"
+            data-ar="الوثائق الأساسية لضمان نجاح التقديم"
+          >
+            Essential documentation for successful submission
+          </p>
+          <div></div>
+        </div>
+        <div
+          class="cards"
+          style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))"
+        >
+          <a
+            href="Type_Approval_Form.pdf"
+            download
+            class="card reveal"
+            style="border: 1px solid var(--primary)"
+          >
+            <span class="req-badge" data-en="Official" data-ar="رسمي"
+              >Official</span
+            >
+            <i class="fas fa-file-pdf"></i>
+            <h4 data-en="Application Form" data-ar="نموذج الطلب">
+              Application Form
+              <i class="fas fa-download" style="font-size: 0.8rem"></i>
+            </h4>
+            <p
+              data-en="Download, fill, and stamp the official MTIT application form."
+              data-ar="قم بتحميل وتعبئة وختم نموذج طلب وزارة الاتصالات الرسمي."
+            >
+              Download, fill, and stamp the official MTIT application form.
+            </p>
+          </a>
+          <div class="card reveal">
+            <span class="req-badge" data-en="Technical" data-ar="تقني"
+              >Technical</span
+            >
+            <i class="fas fa-box-open"></i>
+            <h4 data-en="TCF Dossier" data-ar="ملف TCF">TCF Dossier</h4>
+            <p
+              data-en="Complete Technical Construction File including block diagrams and BOM."
+              data-ar="ملف الإنشاء الفني الكامل بما في ذلك المخططات التوضيحية وقائمة المواد."
+            >
+              Complete Technical Construction File including block diagrams and
+              BOM.
+            </p>
+          </div>
+          <div class="card reveal">
+            <span class="req-badge" data-en="Legal" data-ar="قانوني"
+              >Legal</span
+            >
+            <i class="fas fa-file-contract"></i>
+            <h4 data-en="DoC" data-ar="إعلان المطابقة">DoC</h4>
+            <p
+              data-en="EU Declaration of Conformity signed by the manufacturer's representative."
+              data-ar="إعلان المطابقة للاتحاد الأوروبي موقع من قبل ممثل الشركة المصنعة."
+            >
+              EU Declaration of Conformity signed by the manufacturer's
+              representative.
+            </p>
+          </div>
+          <div class="card reveal">
+            <span class="req-badge" data-en="Agent" data-ar="وكيل">Agent</span>
+            <i class="fas fa-stamp"></i>
+            <h4 data-en="LoA" data-ar="خطاب التفويض">LoA</h4>
+            <p
+              data-en="Official Letter of Authorization appointing us as your local agent."
+              data-ar="خطاب تفويض رسمي لتعييننا كوكيل محلي لك."
+            >
+              Official Letter of Authorization appointing us as your local
+              agent.
+            </p>
+          </div>
+          <div class="card reveal">
+            <span class="req-badge" data-en="End-User" data-ar="المستخدم"
+              >End-User</span
+            >
+            <i class="fas fa-book-open"></i>
+            <h4 data-en="User Manual" data-ar="دليل المستخدم">User Manual</h4>
+            <p
+              data-en="Detailed operation guide in English (Arabic translation may be requested)."
+              data-ar="دليل تشغيل مفصل باللغة الإنجليزية (قد يطلب ترجمة عربية)."
+            >
+              Detailed operation guide in English (Arabic translation may be
+              requested.
+            </p>
+          </div>
+          <div class="card reveal">
+            <span
+              class="req-badge"
+              data-en="HW Design"
+              data-ar="تصميم الهاردوير"
+              >HW Design</span
+            >
+            <i class="fas fa-project-diagram"></i>
+            <h4 data-en="Schematic Diagram" data-ar="المخطط الدائري">
+              Schematic Diagram
+            </h4>
+            <p
+              data-en="Detailed circuit drawings and internal hardware architecture of the device."
+              data-ar="رسومات الدوائر التفصيلية وهندسة الأجهزة الداخلية للجهاز."
+            >
+              Detailed circuit drawings and internal hardware architecture of
+              the device.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="global-approval" class="global-approval-section">
+        <div class="section-title reveal">
+          <h2
+            data-en="Yemen Type Approval Command Center"
+            data-ar="مركز اعتماد النوع في اليمن"
+          >
+            Yemen Type Approval Command Center
+          </h2>
+          <p
+            style="margin-top: 10px; opacity: 0.8"
+            data-en="A practical control point for telecom, wireless, IoT, satellite, and network equipment entering the Yemeni market."
+            data-ar="نقطة تحكم عملية لدخول أجهزة الاتصالات واللاسلكي وإنترنت الأشياء والأقمار الصناعية والشبكات إلى السوق اليمني."
+          >
+            A practical control point for telecom, wireless, IoT, satellite,
+            and network equipment entering the Yemeni market.
+          </p>
+          <div></div>
+        </div>
+
+        <div class="global-intro reveal">
+          <div>
+            <span class="eyebrow" data-en="Yemen Market Access" data-ar="دخول السوق اليمني"
+              >Yemen Market Access</span
+            >
+            <h3
+              data-en="From technical file to approval-ready certificate"
+              data-ar="من الملف الفني إلى شهادة جاهزة للاعتماد"
+            >
+              From technical file to approval-ready certificate
+            </h3>
+            <p
+              data-en="For Yemen, successful Type Approval depends on matching the exact device model with the right technical evidence, authorized documents, spectrum review, local submission path, and market-readiness follow-up. Continental turns scattered certificates, reports, manuals, and manufacturer letters into a clear file ready for authority review."
+              data-ar="في اليمن يعتمد نجاح اعتماد النوع على مطابقة موديل الجهاز بدقة مع الأدلة الفنية الصحيحة، وثائق التفويض، مراجعة الطيف الترددي، مسار التقديم المحلي، ومتابعة جاهزية السوق. تحوّل كونتيننتال الشهادات والتقارير والأدلة وخطابات المصنع إلى ملف واضح وجاهز لمراجعة الجهة المختصة."
+            >
+              For Yemen, successful Type Approval depends on matching the exact
+              device model with the right technical evidence, authorized
+              documents, spectrum review, local submission path, and import
+              support. Continental turns scattered certificates, reports,
+              manuals, and manufacturer letters into a clear file ready for
+              authority review.
+            </p>
+          </div>
+          <div class="global-proof-panel">
+            <strong data-en="Yemen File Control" data-ar="ضبط ملف اليمن"
+              >Yemen File Control</strong
+            >
+            <ul>
+              <li data-en="Exact model, variants, hardware version, and software version" data-ar="الموديل الدقيق والنسخ وإصدار العتاد والبرمجيات">
+                Exact model, variants, hardware version, and software version
+              </li>
+              <li data-en="RF, EMC, Safety, SAR, battery, and charger evidence" data-ar="أدلة RF وEMC والسلامة وSAR والبطارية والشاحن">
+                RF, EMC, Safety, SAR, battery, and charger evidence
+              </li>
+              <li data-en="Authorization letter, importer details, and application form" data-ar="خطاب التفويض وبيانات المستورد ونموذج الطلب">
+                Authorization letter, importer details, and application form
+              </li>
+              <li data-en="Certificate use guidance, validity tracking, and renewal planning" data-ar="إرشاد استخدام الشهادة وتتبع الصلاحية وخطة التجديد">
+                Certificate use guidance, validity tracking, and renewal
+                planning
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="approval-map-grid reveal">
+          <article class="approval-region">
+            <i class="fas fa-route"></i>
+            <h3 data-en="Submission Route" data-ar="مسار التقديم">Submission Route</h3>
+            <p
+              data-en="We identify the correct local path, prepare the application package, manage authority comments, and keep the file traceable until approval."
+              data-ar="نحدد المسار المحلي الصحيح، نجهز ملف الطلب، نتابع ملاحظات الجهة، ونحافظ على تتبع الملف حتى صدور الموافقة."
+            >
+              We identify the correct local path, prepare the application
+              package, manage authority comments, and keep the file traceable
+              until approval.
+            </p>
+          </article>
+          <article class="approval-region">
+            <i class="fas fa-satellite-dish"></i>
+            <h3 data-en="Spectrum Review" data-ar="مراجعة الترددات">Spectrum Review</h3>
+            <p
+              data-en="We compare Wi-Fi, Bluetooth, cellular, IoT, RFID, GNSS, and satellite features against Yemen’s applicable spectrum expectations before shipment."
+              data-ar="نقارن خصائص Wi-Fi وBluetooth والاتصالات الخلوية وIoT وRFID وGNSS والأقمار الصناعية مع توقعات الطيف المطبقة في اليمن قبل الشحن."
+            >
+              We compare Wi-Fi, Bluetooth, cellular, IoT, RFID, GNSS, and
+              satellite features against Yemen’s applicable spectrum
+              expectations before shipment.
+            </p>
+          </article>
+          <article class="approval-region">
+            <i class="fas fa-file-circle-check"></i>
+            <h3 data-en="Technical Dossier" data-ar="الملف الفني">Technical Dossier</h3>
+            <p
+              data-en="Reports, certificates, manuals, internal photos, block diagrams, declarations, and authorization letters are checked for consistency."
+              data-ar="تتم مراجعة التقارير والشهادات والأدلة والصور الداخلية والمخططات وإعلانات المطابقة وخطابات التفويض لضمان الاتساق."
+            >
+              Reports, certificates, manuals, internal photos, block diagrams,
+              declarations, and authorization letters are checked for
+              consistency.
+            </p>
+          </article>
+          <article class="approval-region">
+            <i class="fas fa-shield-halved"></i>
+            <h3 data-en="Risk Prevention" data-ar="منع المخاطر">Risk Prevention</h3>
+            <p
+              data-en="We flag model mismatches, missing SAR or safety evidence, unsupported bands, unclear importer data, and documentation gaps before submission."
+              data-ar="نحدد عدم تطابق الموديلات ونقص أدلة SAR أو السلامة والنطاقات غير المدعومة وغموض بيانات المستورد وفجوات الوثائق قبل التقديم."
+            >
+              We flag model mismatches, missing SAR or safety evidence,
+              unsupported bands, unclear importer data, and documentation gaps
+              before submission.
+            </p>
+          </article>
+          <article class="approval-region">
+            <i class="fas fa-clipboard-check"></i>
+            <h3 data-en="Market Readiness" data-ar="جاهزية السوق">Market Readiness</h3>
+            <p
+              data-en="The approval file is prepared to be clear, consistent, and usable for business teams after approval is issued."
+              data-ar="يتم تجهيز ملف الموافقة مع مراعاة مرحلة استخدام الشهادة لضمان وضوح الملف بعد صدور الاعتماد."
+            >
+              The approval file is prepared to be clear, consistent, and
+              usable for business teams after approval is issued.
+            </p>
+          </article>
+          <article class="approval-region">
+            <i class="fas fa-rotate"></i>
+            <h3 data-en="Renewal & Changes" data-ar="التجديد والتغييرات">Renewal & Changes</h3>
+            <p
+              data-en="We track certificate validity and evaluate whether changes in model, antenna, module, software, or supplier require a new submission."
+              data-ar="نتابع صلاحية الشهادة ونقيّم ما إذا كانت تغييرات الموديل أو الهوائي أو الوحدة أو البرنامج أو المورد تتطلب طلباً جديداً."
+            >
+              We track certificate validity and evaluate whether changes in
+              model, antenna, module, software, or supplier require a new
+              submission.
+            </p>
+          </article>
+        </div>
+
+        <div class="frequency-matrix reveal">
+          <div class="matrix-copy">
+            <span class="eyebrow" data-en="Yemen Readiness" data-ar="جاهزية اليمن"
+              >Yemen Readiness</span
+            >
+            <h3
+              data-en="A pre-submission checklist built for Yemen"
+              data-ar="قائمة تحقق قبل التقديم مخصصة لليمن"
+            >
+              A pre-submission checklist built for Yemen
+            </h3>
+            <p
+              data-en="The strongest approval file is the one that answers the authority’s questions before they are asked. We review the device, evidence, labels, importer data, and spectrum profile before submission. Frequency information can change with official updates, so the final position must always be confirmed for the exact model and date."
+              data-ar="أقوى ملف اعتماد هو الملف الذي يجيب على أسئلة الجهة قبل طرحها. نراجع الجهاز والأدلة والملصقات وبيانات المستورد وملف الترددات قبل التقديم. قد تتغير معلومات الترددات مع التحديثات الرسمية، لذلك يجب تأكيد الوضع النهائي للموديل والتاريخ المحددين."
+            >
+              The strongest approval file is the one that answers the
+              authority’s questions before they are asked. We review the
+              device, evidence, labels, importer data, and spectrum profile
+              before submission. Frequency information can change with official
+              updates, so the final position must always be confirmed for the
+              exact model and date.
+            </p>
+          </div>
+          <div class="matrix-table-wrap">
+            <table class="matrix-table">
+              <thead>
+                <tr>
+                  <th data-en="Checkpoint" data-ar="نقطة التحقق">Checkpoint</th>
+                  <th data-en="What We Review" data-ar="ما نراجعه">
+                    What We Review
+                  </th>
+                  <th data-en="Why It Matters" data-ar="لماذا يهم">Why It Matters</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td data-en="Radio Profile" data-ar="ملف الراديو">Radio Profile</td>
+                  <td>Wi-Fi, Bluetooth, cellular, GNSS, RFID, LoRa, satellite</td>
+                  <td data-en="Avoid unsupported bands or hidden transmitters" data-ar="تجنب النطاقات غير المدعومة أو المرسلات المخفية">
+                    Avoid unsupported bands or hidden transmitters
+                  </td>
+                </tr>
+                <tr>
+                  <td data-en="Reports" data-ar="التقارير">Reports</td>
+                  <td>RF, EMC, Safety, SAR, battery, charger, DoC</td>
+                  <td data-en="Confirm test evidence covers the exact model" data-ar="تأكيد أن أدلة الاختبار تغطي الموديل نفسه">
+                    Confirm test evidence covers the exact model
+                  </td>
+                </tr>
+                <tr>
+                  <td data-en="Documents" data-ar="الوثائق">Documents</td>
+                  <td>Application form, LoA, manuals, photos, labels, importer data</td>
+                  <td data-en="Reduce authority questions and resubmission delays" data-ar="تقليل ملاحظات الجهة وتأخير إعادة التقديم">
+                    Reduce authority questions and resubmission delays
+                  </td>
+                </tr>
+                <tr>
+                  <td data-en="Market Use" data-ar="الاستخدام في السوق">Market Use</td>
+                  <td>Importer, end use, shipment purpose, quantities, accessories</td>
+                  <td data-en="Align approval with business use and certificate control" data-ar="مواءمة الاعتماد مع الاستخدام التجاري وضبط الشهادة">
+                    Align approval with business use and certificate control
+                  </td>
+                </tr>
+                <tr>
+                  <td data-en="After Approval" data-ar="ما بعد الاعتماد">After Approval</td>
+                  <td>Validity, renewal date, model change, certificate use</td>
+                  <td data-en="Keep the approval useful after the first shipment" data-ar="الحفاظ على فاعلية الاعتماد بعد أول شحنة">
+                    Keep the approval useful after the first shipment
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="ai-assistant"
+        class="reveal"
+        style="
+          padding: 60px 20px;
+          background: linear-gradient(
+            135deg,
+            rgba(79, 124, 255, 0.1) 0%,
+            rgba(26, 37, 86, 0.05) 100%
+          );
+          border-radius: 20px;
+          margin: 40px 20px;
+          text-align: center;
+        "
+      >
+        <div class="ai-box">
+          <i
+            class="fas fa-robot"
+            style="font-size: 3rem; color: var(--primary); margin-bottom: 20px"
+          ></i>
+          <h2 data-en="Meet Con Elite AI" data-ar="تعرف على كون ايليت الذكي">
+            Meet Con Elite AI
+          </h2>
+          <p
+            style="max-width: 700px; margin: 15px auto; opacity: 0.8"
+            data-en="Our smart assistant provides instant answers 24/7 about Yemen telecom regulations and Type Approval requirements."
+            data-ar="مساعدنا الذكي يقدم إجابات فورية على مدار الساعة حول لوائح الاتصالات اليمنية ومتطلبات اعتماد النوع."
+          >
+            Our smart assistant provides instant answers 24/7 about Yemen
+            telecom regulations and Type Approval requirements.
+          </p>
+          <a
+            href="javascript:void(0)"
+            onclick="event.stopPropagation(); toggleChat()"
+            class="btn ai-special-btn"
+            data-en="Consult Con Elite"
+            data-ar="استشر كون ايليت"
+            >Consult Con Elite</a
+          >
+        </div>
+      </section>
+
+      <section id="faq">
+        <div class="section-title reveal">
+          <h2 data-en="Frequently Asked Questions" data-ar="الأسئلة الشائعة">
+            Frequently Asked Questions
+          </h2>
+          <div></div>
+        </div>
+        <div class="faq-container reveal">
+          <div class="faq-item">
+            <div
+              class="faq-question"
+              data-en="How long does the Type Approval process take?"
+              data-ar="كم تستغرق عملية اعتماد النوع؟"
+            >
+              How long does the Type Approval process take?
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div
+              class="faq-answer"
+              data-en="On average, the process takes between 2 to 4 working weeks, assuming all technical documents are complete and meet the MTIT standards."
+              data-ar="في المتوسط، تستغرق العملية ما بين 2 إلى 4 أسابيع عمل، بشرط أن تكون جميع الوثائق الفنية كاملة وتلبي معايير وزارة الاتصالات."
+            >
+              On average, the process takes between 2 to 4 working weeks,
+              assuming all technical documents are complete and meet the MTIT
+              standards.
+            </div>
+          </div>
+          <div class="faq-item">
+            <div
+              class="faq-question"
+              data-en="Is an in-country local representative mandatory?"
+              data-ar="هل وجود ممثل محلي داخل الدولة إلزامي؟"
+            >
+              Is an in-country local representative mandatory?
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div
+              class="faq-answer"
+              data-en="Yes, according to Yemeni regulations, foreign manufacturers must appoint a licensed local agent like Continental to handle all administrative and technical procedures."
+              data-ar="نعم، وفقاً للوائح اليمنية، يجب على المصنعين الأجانب تعيين وكيل محلي مرخص مثل كونتيننتال للتعامل مع جميع الإجراءات الإدارية والفنية."
+            >
+              Yes, according to Yemeni regulations, foreign manufacturers must
+              appoint a licensed local agent like Continental to handle all
+              administrative and technical procedures.
+            </div>
+          </div>
+          <div class="faq-item">
+            <div
+              class="faq-question"
+              data-en="What is the validity of the Type Approval certificate?"
+              data-ar="ما هي مدة صلاحية شهادة اعتماد النوع؟"
+            >
+              What is the validity of the Type Approval certificate?
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div
+              class="faq-answer"
+              data-en="Certificates are generally valid for 2 years. We provide renewal services 3 months prior to the expiration date."
+              data-ar="الشهادات صالحة بشكل عام لمدة 2 سنوات. نحن نقدم خدمات التجديد قبل 3 أشهر من تاريخ الانتهاء."
+            >
+              Certificates are generally valid for 2 years. We provide renewal
+              services 3 months prior to the expiration date.
+            </div>
+          </div>
+          <div class="faq-item">
+            <div
+              class="faq-question"
+              data-en="Are test samples required for every application?"
+              data-ar="هل عينات الاختبار مطلوبة لكل طلب؟"
+            >
+              Are test samples required for every application?
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div
+              class="faq-answer"
+              data-en="In most cases, technical test reports from accredited international laboratories (ILAC/MRA) are sufficient, but the Ministry reserves the right to request a physical sample for certain technologies."
+              data-ar="في معظم الحالات، تكون تقارير الاختبار الفنية من المختبرات الدولية المعتمدة كافية، ولكن تحتفظ الوزارة بالحق في طلب عينة مادية لتقنيات معينة."
+            >
+              In most cases, technical test reports from accredited
+              international laboratories (ILAC/MRA) are sufficient, but the
+              Ministry reserves the right to request a physical sample for
+              certain technologies.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="section-title reveal">
+          <h2 data-en="Get In Touch" data-ar="تواصل معنا">Get In Touch</h2>
+          <div></div>
+        </div>
+        <div class="contact-container reveal">
+          <div class="contact-info">
+            <h3 data-en="Contact Details" data-ar="تفاصيل الاتصال">
+              Contact Details
+            </h3>
+            <div class="contact-item">
+              <i class="fas fa-phone-alt" style="transform: rotate(90deg)"></i>
+              <div>
+                <p data-en="Call Us" data-ar="اتصل بنا">Call Us</p>
+                <strong>+967 772299400</strong>
+              </div>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-envelope"></i>
+              <div>
+                <p data-en="Email Us" data-ar="راسلنا">Email Us</p>
+                <strong>Continental231@gmail.com</strong>
+              </div>
+            </div>
+            <div class="contact-item">
+              <i class="fab fa-linkedin"></i>
+              <div>
+                <p data-en="LinkedIn" data-ar="لينكد إن">LinkedIn</p>
+                <a
+                  href="https://www.linkedin.com/in/continental-business-923443290"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <strong>Continental Business</strong>
+                </a>
+              </div>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <div>
+                <p data-en="Our Office" data-ar="مكتبنا">Our Office</p>
+                <strong
+                  data-en="Sana'a, Republic of Yemen"
+                  data-ar="صنعاء، الجمهورية اليمنية"
+                  >Sana'a, Republic of Yemen</strong
+                >
+              </div>
+            </div>
+            <div class="map-box">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d123136.000000!2d44.200000!3d15.350000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1603db4e0b000001%3A0x0!2zU2FuYSdhLCBZZW1lbg!5e0!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s"
+                width="100%"
+                height="100%"
+                style="border: 0"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+          </div>
+          <form
+            class="contact-form"
+            action="https://formspree.io/f/mjglwple"
+            method="POST"
+            onsubmit="handleFormSubmit(event)"
+          >
+            <div class="form-row">
+              <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                data-en-placeholder="Your Name"
+                data-ar-placeholder="اسمك الكامل"
+                required
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                data-en-placeholder="Your Email"
+                data-ar-placeholder="بريدك الإلكتروني"
+                required
+              />
+            </div>
+            <textarea
+              name="message"
+              rows="5"
+              placeholder="Tell us about your project or device models..."
+              data-en-placeholder="Tell us about your project or device models..."
+              data-ar-placeholder="أخبرنا عن مشروعك أو موديلات الأجهزة..."
+              required
+            ></textarea>
+            <button
+              type="submit"
+              class="btn"
+              data-en="Send Message"
+              data-ar="إرسال الرسالة"
+            >
+              Send Message <i class="fas fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="footer-grid">
+          <div class="footer-about">
+            <h3 data-en="Continental" data-ar="كونتيننتال">Continental</h3>
+            <p
+              data-en="Specialized in providing comprehensive Type Approval and regulatory consulting since 2021 in the Republic of Yemen. Your trusted gateway to the local telecom market."
+              data-ar="متخصصون في تقديم استشارات اعتماد النوع الشاملة والامتثال التنظيمي منذ عام 2021 في الجمهورية اليمنية. بوابتكم الموثوقة لسوق الاتصالات المحلي."
+            >
+              Specialized in providing comprehensive Type Approval and
+              regulatory consulting since 2021 in the Republic of Yemen.
+            </p>
+          </div>
+          <div class="footer-links">
+            <h4 data-en="Quick Links" data-ar="روابط سريعة">Quick Links</h4>
+            <ul>
+              <li>
+                <a href="#about"
+                  ><i class="fas fa-chevron-right"></i>
+                  <span data-en="About Us" data-ar="من نحن">About Us</span></a
+                >
+              </li>
+              <li>
+                <a href="#why-us"
+                  ><i class="fas fa-chevron-right"></i>
+                  <span data-en="Why Us" data-ar="لماذا نحن">Why Us</span></a
+                >
+              </li>
+              <li>
+                <a href="#services"
+                  ><i class="fas fa-chevron-right"></i>
+                  <span data-en="Our Services" data-ar="خدماتنا"
+                    >Our Services</span
+                  ></a
+                >
+              </li>
+              <li>
+                <a href="#requirements"
+                  ><i class="fas fa-chevron-right"></i>
+                  <span data-en="Requirements" data-ar="المتطلبات"
+                    >Requirements</span
+                  ></a
+                >
+              </li>
+              <li>
+                <a href="#global-approval"
+                  ><i class="fas fa-chevron-right"></i>
+                  <span data-en="Yemen Type Approval" data-ar="اعتماد النوع في اليمن"
+                    >Yemen Type Approval</span
+                  ></a
+                >
+              </li>
+              <li>
+                <a href="#faq"
+                  ><i class="fas fa-chevron-right"></i>
+                  <span data-en="FAQ" data-ar="الأسئلة الشائعة">FAQ</span></a
+                >
+              </li>
+              <li>
+                <a href="#contact"
+                  ><i class="fas fa-chevron-right"></i>
+                  <span data-en="Contact" data-ar="اتصل بنا">Contact</span></a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="footer-links">
+            <h4 data-en="Our Services" data-ar="خدماتنا">Our Services</h4>
+            <ul>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>
+                  <span data-en="MTIT Approval" data-ar="اعتماد وزارة الاتصالات"
+                    >MTIT Approval</span
+                  ></a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>
+                  <span data-en="Safety Compliance" data-ar="امتثال السلامة"
+                    >Safety Compliance</span
+                  ></a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>
+                  <span data-en="Technical Support" data-ar="الدعم الفني"
+                    >Technical Support</span
+                  ></a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="footer-contact">
+            <h4 data-en="Find Us" data-ar="موقعنا">Find Us</h4>
+            <p style="margin-bottom: 10px; opacity: 0.7">
+              <i class="fas fa-location-dot" style="margin-right: 10px"></i>
+              <span data-en="Sana'a, Yemen" data-ar="صنعاء، اليمن"
+                >Sana'a, Yemen</span
+              >
+            </p>
+            <p style="opacity: 0.7">
+              <i class="fas fa-phone" style="margin-right: 10px"></i> +967
+              772299400
+            </p>
+            <p style="opacity: 0.7; margin-top: 10px">
+              <i class="fas fa-clock" style="margin-right: 10px"></i>
+              <span
+                data-en="Sat - Thu: 8:00 - 16:00"
+                data-ar="السبت - الخميس: 8:00 - 16:00"
+                >Sat - Thu: 8:00 - 16:00</span
+              >
+            </p>
+          </div>
+          <div class="footer-contact developer-contact">
+            <div class="developer-card-head">
+              <div class="developer-avatar" aria-hidden="true">AA</div>
+              <div>
+                <h4 data-en="Developer" data-ar="المبرمج">Developer</h4>
+                <strong data-en="Ayman Abdullah" data-ar="ايمن عبدالله">Ayman Abdullah</strong>
+                <span data-en="Website design and programming" data-ar="تصميم وبرمجة الموقع">Website design and programming</span>
+              </div>
+            </div>
+            <div class="developer-links">
+              <a href="tel:+967779299051"><i class="fas fa-phone"></i><span>+967 779299051</span></a>
+              <a href="mailto:aymnalmmry06@gmail.com"><i class="fas fa-envelope"></i><span>aymnalmmry06@gmail.com</span></a>
+              <a href="https://ayman-p.netlify.app/" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i><span data-en="Personal Website" data-ar="الموقع الشخصي">Personal Website</span></a>
+              <a href="https://www.linkedin.com/in/ayman-ghaleb-522151372?utm_source=share_via&amp;utm_content=profile&amp;utm_medium=member_android" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i><span>LinkedIn</span></a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p
+            data-en="© 2026 Continental for Business Completion Services. All Rights Reserved."
+            data-ar="© 2026 كونتيننتال لخدمات إنجاز الأعمال. جميع الحقوق محفوظة."
+          >
+            © 2026 Continental for Business Completion Services. All Rights Reserved.
+          </p>
+        </div>
+      </footer>
+    </main>
+
+    <div class="chat-widget">
+      <div class="chat-window" id="chatWindow" style="display: none" role="dialog" aria-label="Con Elite chat" aria-modal="false">
+        <div class="chat-header">
+          <span><i class="fas fa-robot"></i> Con Elite AI</span>
+          <i
+            class="fas fa-times"
+            onclick="toggleChat()"
+            style="cursor: pointer; opacity: 0.8"
+          ></i>
+        </div>
+        <div id="chatMessages" class="chat-messages">
+          <div class="message bot-message">
+            <div style="direction: rtl; margin-bottom: 5px">
+              مرحباً بك في كونتيننتال! أنا كون ايليت، كيف يمكنني مساعدتك في
+              إجراءات اعتماد النوع اليوم؟
+            </div>
+            <div
+              style="
+                direction: ltr;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                padding-top: 5px;
+                margin-top: 5px;
+              "
+            >
+              Welcome to Continental! I am Con Elite, how can I assist you with
+              Type Approval procedures today?
+            </div>
+          </div>
+        </div>
+        <div class="chat-input-area">
+          <input
+            type="text"
+            id="chatInput"
+            placeholder="اكتب رسالتك هنا... / Type your message..."
+            data-ar-placeholder="اكتب رسالتك هنا..."
+            data-en-placeholder="Type your message..."
+          />
+          <button class="send-chat" onclick="sendChatMessage()">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+      </div>
+      <div class="chat-button" onclick="toggleChat(event)" id="botBtn" role="button" aria-label="Open Con Elite chat" aria-expanded="false" tabindex="0">
+        <i class="fas fa-robot"></i>
+      </div>
+    </div>
+
+    <a
+      href="https://wa.me/967772299400"
+      class="whatsapp-btn"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <i class="fab fa-whatsapp"></i><span>WhatsApp</span>
+    </a>
+
+    <script defer src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script defer src="app.js"></script>
+  </body>
+</html>
