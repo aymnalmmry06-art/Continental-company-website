@@ -384,7 +384,7 @@ function renderNews() {
     container.innerHTML = "";
     const message = document.createElement("div");
     message.className = "news-empty-state";
-    message.innerHTML = `<i class="fas fa-newspaper"></i><strong>${
+    message.innerHTML = `<span class="news-empty-logo"><img src="logo.png" alt="Continental Logo"></span><strong>${
       currentLang === "ar" ? "لا توجد أخبار في الوقت الحالي" : "No news at the moment"
     }</strong>`;
     container.appendChild(message);
@@ -421,7 +421,7 @@ function renderNews() {
     if (completedInitialLoads >= NEWS_PATHS.length) {
         const empty = document.createElement("div");
         empty.className = "news-empty-state";
-        empty.innerHTML = `<i class="fas fa-inbox"></i><strong>${
+        empty.innerHTML = `<span class="news-empty-logo"><img src="logo.png" alt="Continental Logo"></span><strong>${
           currentLang === "ar" ? "لا توجد أخبار في الوقت الحالي" : "No news at the moment"
         }</strong>`;
         container.appendChild(empty);
