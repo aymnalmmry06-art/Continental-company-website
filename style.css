@@ -4261,3 +4261,19 @@ body.light #global-approval .approval-region > i,
 #global-approval .approval-region:hover {
   border-color: rgba(49, 88, 201, 0.2) !important;
 }
+
+html[dir="rtl"] .footer .footer-links i,
+html[dir="rtl"] .footer .footer-links ul li a:hover i,
+html[dir="rtl"] .footer .footer-contact i,
+html[dir="rtl"] .footer .developer-links i {
+  transform: none !important;
+  rotate: 0deg !important;
+  scale: 1 !important;
+}
+
+html[dir="rtl"] .footer .footer-links ul li a,
+html[dir="rtl"] .footer .footer-contact p,
+html[dir="rtl"] .footer .developer-links a {
+  direction: ltr !important;
+  flex-direction: row !important;
+}
