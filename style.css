@@ -3340,11 +3340,13 @@ body.light .matrix-table {
   position: relative;
   display: grid;
   gap: 9px;
+  direction: ltr;
 }
 
 .developer-links a {
   display: flex;
   align-items: center;
+  flex-direction: row;
   gap: 10px;
   min-height: 40px;
   padding: 9px 11px;
@@ -3355,6 +3357,14 @@ body.light .matrix-table {
 
 .developer-links a:hover {
   background: rgba(255, 255, 255, 0.11);
+}
+
+.developer-links i {
+  margin: 0 !important;
+}
+
+.developer-links span {
+  direction: ltr;
 }
 
 @media (min-width: 760px) {
@@ -3852,6 +3862,19 @@ body.light .news-empty-state > i {
   margin-left: 10px !important;
   margin-right: 0 !important;
   transform: none !important;
+}
+
+[dir="rtl"] .developer-links,
+[dir="rtl"] .developer-links a {
+  direction: ltr;
+}
+
+[dir="rtl"] .developer-links a {
+  flex-direction: row !important;
+}
+
+[dir="rtl"] .developer-links i {
+  margin: 0 !important;
 }
 
 .about-feature-item i,
