@@ -964,8 +964,8 @@ function getFreeAssistantReply(message) {
       en: "Lead time depends on the authority, document completeness, and review queue. It often takes several working weeks, and may take longer if reports are incomplete or clarifications/samples are requested. A clean submission file reduces delays.",
     },
     price: {
-      ar: "تختلف التكلفة حسب نوع الجهاز والخدمة المطلوبة. للحصول على عرض سعر دقيق، اضغط على زر طلب تسعيرة أو راسلنا عبر واتساب.",
-      en: "Pricing depends on the device type and required service. For an accurate quote, use the Request a Quote button or contact us on WhatsApp.",
+      ar: "يسعدنا مساعدتك بكل احترافية. تختلف الأسعار حسب نوع الجهاز، عدد الموديلات، والوثائق المتوفرة، لذلك نفضل مراجعة التفاصيل أولاً لنقدم لك عرضاً دقيقاً ومناسباً. يمكنك إرسال بيانات الجهاز عبر واتساب: +967 772299400 أو عبر البريد الإلكتروني: Continental231@gmail.com، وسيتواصل معك فريق كونتيننتال في أقرب وقت.",
+      en: "We would be happy to assist you professionally. Pricing depends on the device type, number of models, and available documents, so we prefer to review the details first and provide an accurate, suitable quotation. Please send your device details by WhatsApp: +967 772299400 or email: Continental231@gmail.com, and the Continental team will get back to you soon.",
     },
     renewal: {
       ar: "نعم، نوفر خدمة تجديد شهادات اعتماد النوع. يفضل بدء التجديد قبل انتهاء الشهادة بوقت كافٍ، خصوصًا إذا تغير الموديل أو البرنامج أو مكونات الراديو أو تقارير الاختبار.",
