@@ -4247,3 +4247,17 @@ body.light #ai-assistant {
 [dir="rtl"] .developer-links span {
   direction: ltr;
 }
+
+#global-approval .approval-region > i,
+body.light #global-approval .approval-region > i,
+#global-approval .approval-region:hover > i {
+  background: rgba(49, 88, 201, 0.12) !important;
+  color: #2563eb !important;
+  box-shadow: none !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+#global-approval .approval-region,
+#global-approval .approval-region:hover {
+  border-color: rgba(49, 88, 201, 0.2) !important;
+}
