@@ -125,21 +125,36 @@ function registerServiceWorker() {
 function setTranslatedContent(el, value) {
   if (!el || !value) return;
 
-  if (el.dataset.allowHtml === "true" && window.DOMPurify) {
-    el.innerHTML = DOMPurify.sanitize(value);
+  if (el.dataset.allowHtml === "true") {
+    el.innerHTML = window.DOMPurify ? DOMPurify.sanitize(value) : value;
     return;
   }
 
-  if (el.children.length) {
-    const textNode = Array.from(el.childNodes).find(
-      (node) => node.nodeType === Node.TEXT_NODE && node.textContent.trim(),
-    );
+  const preservableIcons = Array.from(el.children).filter((child) =>
+    child.matches("i, svg"),
+  );
+  const onlyHasIcons =
+    preservableIcons.length === el.children.length && preservableIcons.length > 0;
 
-    if (textNode) {
-      textNode.textContent = ` ${value}`;
-    } else {
-      el.appendChild(document.createTextNode(value));
-    }
+  if (onlyHasIcons) {
+    const iconsAtStart = [];
+    const iconsAtEnd = [];
+
+    preservableIcons.forEach((icon) => {
+      if (icon.previousSibling) {
+        iconsAtEnd.push(icon);
+      } else {
+        iconsAtStart.push(icon);
+      }
+    });
+
+    el.replaceChildren(
+      ...iconsAtStart,
+      document.createTextNode(
+        `${iconsAtStart.length ? " " : ""}${value}${iconsAtEnd.length ? " " : ""}`,
+      ),
+      ...iconsAtEnd,
+    );
     return;
   }
 
@@ -165,6 +180,12 @@ function toggleLanguage() {
   placeholders.forEach((el) => {
     const placeholder = el.getAttribute(`data-${currentLang}-placeholder`);
     if (placeholder) el.placeholder = placeholder;
+  });
+
+  const labelledElements = document.querySelectorAll("[data-en-label]");
+  labelledElements.forEach((el) => {
+    const label = el.getAttribute(`data-${currentLang}-label`);
+    if (label) el.setAttribute("aria-label", label);
   });
 
   showToast(

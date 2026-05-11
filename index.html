@@ -351,8 +351,9 @@
       <section class="hero">
         <div class="hero-text reveal">
           <h1
-            data-en="The Gold Standard for Type Approval in Yemen"
-            data-ar="المعيار الذهبي لـ اعتماد النوع في اليمن"
+            data-allow-html="true"
+            data-en="The Gold Standard for <br /><span>Type Approval in Yemen</span>"
+            data-ar="المعيار الذهبي لـ <br /><span>اعتماد النوع في اليمن</span>"
           >
             The Gold Standard for <br /><span>Type Approval in Yemen</span>
           </h1>
@@ -1071,8 +1072,8 @@
             class="fas fa-robot"
             style="font-size: 3rem; color: var(--primary); margin-bottom: 20px"
           ></i>
-          <h2 data-en="Meet Con Elite AI" data-ar="تعرف على كون ايليت الذكي">
-            Meet Con Elite AI
+          <h2 data-en="Meet Con Elite Assistant" data-ar="تعرف على مساعد كون ايليت">
+            Meet Con Elite Assistant
           </h2>
           <p
             style="max-width: 700px; margin: 15px auto; opacity: 0.8"
@@ -1463,10 +1464,14 @@
         style="display: none"
         role="dialog"
         aria-label="Con Elite chat"
+        data-en-label="Con Elite chat"
+        data-ar-label="محادثة كون ايليت"
         aria-modal="false"
       >
         <div class="chat-header">
-          <span><i class="fas fa-robot"></i> Con Elite AI</span>
+          <span data-en="Con Elite Assistant" data-ar="مساعد كون ايليت"
+            ><i class="fas fa-robot"></i> Con Elite Assistant</span
+          >
           <i
             class="fas fa-times"
             onclick="toggleChat()"
@@ -1475,19 +1480,11 @@
         </div>
         <div id="chatMessages" class="chat-messages">
           <div class="message bot-message">
-            <div style="direction: rtl; margin-bottom: 5px">
-              مرحباً بك في كونتيننتال! أنا كون ايليت، كيف يمكنني مساعدتك في
-              إجراءات اعتماد النوع اليوم؟
-            </div>
             <div
-              style="
-                direction: ltr;
-                border-top: 1px solid rgba(255, 255, 255, 0.1);
-                padding-top: 5px;
-                margin-top: 5px;
-              "
+              data-en="Welcome to Continental! I am Con Elite. How can I assist you with Type Approval procedures today?"
+              data-ar="مرحباً بك في كونتيننتال! أنا كون ايليت. كيف يمكنني مساعدتك في إجراءات اعتماد النوع اليوم؟"
             >
-              Welcome to Continental! I am Con Elite, how can I assist you with
+              Welcome to Continental! I am Con Elite. How can I assist you with
               Type Approval procedures today?
             </div>
           </div>
@@ -1511,6 +1508,8 @@
         id="botBtn"
         role="button"
         aria-label="Open Con Elite chat"
+        data-en-label="Open Con Elite chat"
+        data-ar-label="فتح محادثة كون ايليت"
         aria-expanded="false"
         tabindex="0"
       >

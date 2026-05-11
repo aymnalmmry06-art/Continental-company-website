@@ -4029,3 +4029,135 @@ body.light .connection-card {
 body.light .connection-card h3 {
   color: #3158c9;
 }
+
+/* =========================================================
+   CORPORATE CALM POLISH
+   A restrained layer for a more enterprise-grade experience.
+   ========================================================= */
+:root {
+  --primary: #3158c9;
+  --accent: #c9a646;
+  --bg: #0b1435;
+  --primary-glow: rgba(49, 88, 201, 0.2);
+  --gemini-gradient: linear-gradient(90deg, #3158c9, #c9a646);
+  --radius-lg: 8px;
+  --radius-md: 8px;
+}
+
+body {
+  background: linear-gradient(180deg, #0b1435 0%, #101b42 48%, #0b1435 100%);
+}
+
+body.light {
+  background: #f6f8fc;
+}
+
+header,
+header.scrolled {
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 1px solid rgba(15, 27, 77, 0.1);
+}
+
+.btn,
+.quote-btn-nav,
+.news-action,
+.ai-special-btn,
+#connectionRetryBtn {
+  border-radius: 8px !important;
+  background: linear-gradient(135deg, #3158c9, #244aa8) !important;
+  box-shadow: 0 10px 24px rgba(49, 88, 201, 0.18) !important;
+}
+
+.hero-btns .btn[style*="transparent"] {
+  background: transparent !important;
+  border: 1px solid rgba(201, 166, 70, 0.6) !important;
+  color: #f5e4ae !important;
+}
+
+body.light .hero-btns .btn[style*="transparent"] {
+  color: #0f1b4d !important;
+  border-color: rgba(49, 88, 201, 0.35) !important;
+}
+
+.card,
+.news-card,
+.faq-item,
+.contact-container,
+.modal-content,
+.slider-container,
+.approval-region,
+.global-insight-card,
+.matrix-wrap,
+.requirement-note,
+.stat {
+  border-radius: 8px !important;
+  box-shadow: 0 14px 36px rgba(4, 10, 31, 0.18) !important;
+}
+
+.card:hover,
+.news-card:hover,
+.approval-region:hover,
+.faq-item:hover {
+  border-color: rgba(201, 166, 70, 0.42) !important;
+}
+
+.card i,
+.approval-region i,
+.contact-item i,
+.developer-avatar {
+  border-radius: 8px !important;
+  background: rgba(49, 88, 201, 0.12) !important;
+  color: #d9bc63 !important;
+}
+
+.section-kicker,
+.news-card small,
+.developer-card-head h4 {
+  color: #d9bc63 !important;
+}
+
+.hero h1 span,
+nav a.active {
+  color: #d9bc63 !important;
+  background: none !important;
+  -webkit-text-fill-color: currentColor;
+}
+
+#ai-assistant {
+  background: rgba(255, 255, 255, 0.045) !important;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 8px !important;
+}
+
+body.light #ai-assistant {
+  background: #ffffff !important;
+  border-color: rgba(15, 27, 77, 0.1);
+}
+
+.chat-header {
+  background: linear-gradient(135deg, #17306e, #3158c9) !important;
+}
+
+.connection-icon,
+.connection-icon::after {
+  box-shadow: 0 0 18px rgba(49, 88, 201, 0.28) !important;
+}
+
+.connection-icon::after {
+  border-top-color: #d9bc63 !important;
+}
+
+.connection-divider {
+  background: linear-gradient(90deg, #ffffff, #d9bc63) !important;
+}
+
+.connection-card h3 {
+  color: #f2d27a !important;
+}
+
+[dir="rtl"] .faq-question i,
+[dir="rtl"] .contact-form .btn i,
+[dir="rtl"] .footer-links i {
+  margin-inline-start: 8px;
+  margin-inline-end: 0;
+}
