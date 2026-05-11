@@ -3840,11 +3840,18 @@ body.light .news-empty-state > i {
   flex-direction: row-reverse;
 }
 
-[dir="rtl"] .footer-links i,
-[dir="rtl"] .footer-contact i {
+[dir="rtl"] .footer-links i {
   margin-left: 10px !important;
   margin-right: 0 !important;
   transform: rotate(180deg);
+}
+
+[dir="rtl"] .footer-contact i,
+[dir="rtl"] .developer-links i,
+[dir="rtl"] .contact-item > i {
+  margin-left: 10px !important;
+  margin-right: 0 !important;
+  transform: none !important;
 }
 
 .about-feature-item i,
@@ -4136,6 +4143,17 @@ body.light #ai-assistant {
 
 .chat-header {
   background: linear-gradient(135deg, #17306e, #3158c9) !important;
+}
+
+.contact-item > i,
+.footer-contact i,
+.developer-links i,
+.whatsapp-btn i {
+  transform: none !important;
+}
+
+.contact-item:hover > i {
+  transform: none !important;
 }
 
 .connection-icon,
