@@ -1346,7 +1346,7 @@ nav a,
    ========================================================= */
 
 :root {
-  --premium-gold: #d4af37;
+  --premium-gold: #7fb7d8;
   --premium-dark: #081131;
   --premium-shadow: 0 15px 40px rgba(0, 0, 0, 0.18);
 }
@@ -4066,10 +4066,10 @@ body.light .connection-card h3 {
    ========================================================= */
 :root {
   --primary: #3158c9;
-  --accent: #c9a646;
+  --accent: #7fb7d8;
   --bg: #0b1435;
   --primary-glow: rgba(49, 88, 201, 0.2);
-  --gemini-gradient: linear-gradient(90deg, #3158c9, #c9a646);
+  --gemini-gradient: linear-gradient(90deg, #3158c9, #7fb7d8);
   --radius-lg: 8px;
   --radius-md: 8px;
 }
@@ -4100,8 +4100,8 @@ header.scrolled {
 
 .hero-btns .btn[style*="transparent"] {
   background: transparent !important;
-  border: 1px solid rgba(201, 166, 70, 0.6) !important;
-  color: #f5e4ae !important;
+  border: 1px solid rgba(127, 183, 216, 0.55) !important;
+  color: #cfe7f5 !important;
 }
 
 body.light .hero-btns .btn[style*="transparent"] {
@@ -4128,7 +4128,7 @@ body.light .hero-btns .btn[style*="transparent"] {
 .news-card:hover,
 .approval-region:hover,
 .faq-item:hover {
-  border-color: rgba(201, 166, 70, 0.42) !important;
+  border-color: rgba(127, 183, 216, 0.38) !important;
 }
 
 .card i,
@@ -4137,18 +4137,18 @@ body.light .hero-btns .btn[style*="transparent"] {
 .developer-avatar {
   border-radius: 8px !important;
   background: rgba(49, 88, 201, 0.12) !important;
-  color: #d9bc63 !important;
+  color: #9fcce5 !important;
 }
 
 .section-kicker,
 .news-card small,
 .developer-card-head h4 {
-  color: #d9bc63 !important;
+  color: #9fcce5 !important;
 }
 
 .hero h1 span,
 nav a.active {
-  color: #d9bc63 !important;
+  color: #9fcce5 !important;
   background: none !important;
   -webkit-text-fill-color: currentColor;
 }
@@ -4197,15 +4197,15 @@ body.light #ai-assistant {
 }
 
 .connection-icon::after {
-  border-top-color: #d9bc63 !important;
+  border-top-color: #9fcce5 !important;
 }
 
 .connection-divider {
-  background: linear-gradient(90deg, #ffffff, #d9bc63) !important;
+  background: linear-gradient(90deg, #ffffff, #9fcce5) !important;
 }
 
 .connection-card h3 {
-  color: #f2d27a !important;
+  color: #bfe1f2 !important;
 }
 
 [dir="rtl"] .faq-question i,
