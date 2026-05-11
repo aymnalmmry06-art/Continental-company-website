@@ -802,9 +802,8 @@ function toggleChat(event) {
     if (messagesDiv && messagesDiv.children.length === 0) {
       setTimeout(() => {
         const welcomeMsg =
-          currentLang === "ar"
-            ? "مرحباً بك في كونتيننتال! أنا كون ايليت، كيف يمكنني مساعدتك؟"
-            : "Welcome to Continental! I am Con Elite, how can I help you?";
+          "مرحباً بك في كونتيننتال! أنا كون ايليت. كيف يمكنني مساعدتك في إجراءات اعتماد النوع اليوم؟\n\n" +
+          "Welcome to Continental! I am Con Elite. How can I assist you with Type Approval procedures today?";
         addMessage(welcomeMsg, "bot");
       }, 500);
     }

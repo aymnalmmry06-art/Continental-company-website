@@ -4156,6 +4156,18 @@ body.light #ai-assistant {
   transform: none !important;
 }
 
+.chat-welcome-ar {
+  direction: rtl;
+  margin-bottom: 8px;
+}
+
+.chat-welcome-en {
+  direction: ltr;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  margin-top: 8px;
+  padding-top: 8px;
+}
+
 .connection-icon,
 .connection-icon::after {
   box-shadow: 0 0 18px rgba(49, 88, 201, 0.28) !important;
