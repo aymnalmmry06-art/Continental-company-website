@@ -118,7 +118,7 @@ function registerServiceWorker() {
   if (!("serviceWorker" in navigator)) return;
 
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("sw.js?v=5").catch(() => {});
+    navigator.serviceWorker.register("sw.js?v=6").catch(() => {});
   });
 }
 
@@ -706,10 +706,8 @@ function updateActiveNavLink() {
 window.addEventListener("scroll", () => {
   if (!ticking) {
     window.requestAnimationFrame(() => {
-      if (window.pageYOffset > 400) {
-        if (backToTop) backToTop.style.display = "flex";
-      } else {
-        if (backToTop) backToTop.style.display = "none";
+      if (backToTop) {
+        backToTop.classList.toggle("is-visible", window.pageYOffset > 400);
       }
 
       if (window.scrollY > 50) {
@@ -738,6 +736,7 @@ const startCounters = (el) => {
     counter.dataset.started = "true";
 
     const target = +counter.getAttribute("data-target");
+    counter.innerText = "0";
     const increment = target / 60; // سرعة العداد
 
     const updateCount = () => {
