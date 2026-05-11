@@ -4214,3 +4214,36 @@ body.light #ai-assistant {
   margin-inline-start: 8px;
   margin-inline-end: 0;
 }
+
+.footer i,
+.footer-links ul li a:hover i,
+[dir="rtl"] .footer i,
+[dir="rtl"] .footer-links ul li a:hover i {
+  transform: none !important;
+}
+
+.footer-links ul li a,
+.footer-contact p,
+.developer-links,
+.developer-links a,
+[dir="rtl"] .footer-links ul li a,
+[dir="rtl"] .footer-contact p,
+[dir="rtl"] .developer-links,
+[dir="rtl"] .developer-links a {
+  direction: ltr !important;
+  flex-direction: row !important;
+}
+
+[dir="rtl"] .footer i {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+[dir="rtl"] .footer-links span,
+[dir="rtl"] .footer-contact span {
+  direction: rtl;
+}
+
+[dir="rtl"] .developer-links span {
+  direction: ltr;
+}
