@@ -76,6 +76,15 @@ body {
   min-height: 100vh;
 }
 
+body.intro-pending #main-content {
+  visibility: hidden;
+  animation: intro-main-failsafe 0.01s linear 4.5s forwards;
+}
+
+body.intro-ready #main-content {
+  visibility: visible;
+}
+
 /* --- LOGO OVERLAY (Optimized) --- */
 #logo-overlay {
   position: fixed;
@@ -90,7 +99,7 @@ body {
   z-index: 10000;
   transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: opacity;
-  animation: logo-overlay-failsafe 0.45s ease 2.6s forwards;
+  animation: logo-overlay-failsafe 0.45s ease 4.4s forwards;
 }
 
 .intro-logo {
@@ -1962,6 +1971,23 @@ button:disabled {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
+  }
+}
+
+@keyframes intro-main-failsafe {
+  to {
+    visibility: visible;
+  }
+}
+
+body.intro-pending .reveal {
+  animation: reveal-failsafe 0.01s linear 4.5s forwards;
+}
+
+@keyframes reveal-failsafe {
+  to {
+    opacity: 1;
+    transform: translateY(0) translateZ(0);
   }
 }
 

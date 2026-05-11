@@ -619,11 +619,22 @@ window.addEventListener("DOMContentLoaded", () => {
   const preloader = document.getElementById("preloader");
   const mainContent = document.getElementById("main-content");
   const introSeen = sessionStorage.getItem("continentalIntroSeen") === "true";
+  const showMainContent = () => {
+    document.body.classList.remove("intro-pending");
+    document.body.classList.add("intro-ready");
+    if (mainContent) mainContent.style.visibility = "visible";
+    document.querySelectorAll(".reveal, .stats").forEach((el) => {
+      el.classList.add("active");
+      if (el.classList.contains("stats") || el.querySelector(".counter")) {
+        startCounters(el);
+      }
+    });
+  };
 
   if (introSeen) {
     if (logoOverlay) logoOverlay.style.display = "none";
     if (preloader) preloader.style.display = "none";
-    if (mainContent) mainContent.style.visibility = "visible";
+    showMainContent();
     renderNews();
     return;
   }
@@ -639,7 +650,7 @@ window.addEventListener("DOMContentLoaded", () => {
   setTimeout(() => {
     if (preloader) {
       preloader.style.opacity = "0";
-      if (mainContent) mainContent.style.visibility = "visible";
+      showMainContent();
       sessionStorage.setItem("continentalIntroSeen", "true");
       renderNews();
       setTimeout(() => (preloader.style.display = "none"), 600);
