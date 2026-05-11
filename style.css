@@ -4278,6 +4278,27 @@ html[dir="rtl"] .footer .developer-links a {
   flex-direction: row !important;
 }
 
+.footer-credit {
+  margin-top: 10px;
+  font-size: 0.82rem;
+  opacity: 0.72;
+}
+
+.footer-credit a {
+  color: #9fb8ff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.footer-credit a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+[dir="rtl"] .footer-credit {
+  direction: rtl;
+}
+
 /* =========================================================
    RESPONSIVE OVERLAP GUARDRAILS
    Prevents text, icons, buttons, and sections from colliding
