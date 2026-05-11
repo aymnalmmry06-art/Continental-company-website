@@ -4277,3 +4277,250 @@ html[dir="rtl"] .footer .developer-links a {
   direction: ltr !important;
   flex-direction: row !important;
 }
+
+/* =========================================================
+   RESPONSIVE OVERLAP GUARDRAILS
+   Prevents text, icons, buttons, and sections from colliding
+   across narrow, medium, and wide viewports.
+   ========================================================= */
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+*,
+*::before,
+*::after {
+  min-width: 0;
+}
+
+img,
+svg,
+iframe,
+video,
+canvas {
+  max-width: 100%;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+span,
+strong,
+label,
+button,
+input,
+textarea,
+select,
+li,
+td,
+th,
+.message,
+.faq-answer,
+.news-card,
+.card,
+.approval-region,
+.global-proof-panel,
+.contact-item,
+.footer {
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+section,
+header,
+footer,
+.hero,
+.about-container,
+.contact-container,
+.global-intro,
+.frequency-matrix,
+.footer-grid,
+.cards,
+.news-grid,
+.approval-map-grid,
+.stats {
+  max-width: 100%;
+}
+
+.btn,
+.quote-btn-nav,
+.news-action,
+.ai-special-btn,
+.contact-form button,
+.send-chat,
+#connectionRetryBtn {
+  max-width: 100%;
+  white-space: normal !important;
+  text-align: center;
+  line-height: 1.35;
+  flex-shrink: 0;
+}
+
+.btn i,
+.quote-btn-nav i,
+.news-action i,
+.ai-special-btn i,
+.contact-item > i,
+.approval-region > i,
+.card > i,
+.footer i,
+.developer-links i,
+.send-chat i {
+  flex: 0 0 auto;
+}
+
+.hero-text,
+.about-content,
+.contact-info,
+.contact-form,
+.global-intro > *,
+.frequency-matrix > *,
+.footer-grid > *,
+.modal-content,
+.chat-window {
+  min-width: 0;
+}
+
+.hero-btns,
+.news-actions,
+.developer-links a,
+.footer-links ul li a,
+.footer-contact p,
+.contact-item,
+.about-feature-item,
+.news-action,
+.btn {
+  min-width: 0;
+}
+
+.matrix-table-wrap,
+.map-box,
+.contact-container,
+.modal-content,
+.chat-messages {
+  overflow: auto;
+}
+
+.matrix-table,
+table {
+  max-width: none;
+}
+
+.modal-content {
+  max-height: min(88vh, 760px);
+}
+
+.chat-window {
+  max-height: min(78vh, 680px);
+}
+
+.chat-input-area {
+  min-width: 0;
+}
+
+.chat-input-area input {
+  min-width: 0;
+  width: 100%;
+}
+
+@media (max-width: 968px) {
+  header {
+    gap: 10px;
+  }
+
+  .nav-right {
+    min-width: 0;
+    gap: 8px;
+  }
+
+  nav.active {
+    max-width: 100vw;
+  }
+
+  .hero,
+  .about-container,
+  .contact-container,
+  .global-intro,
+  .frequency-matrix {
+    grid-template-columns: 1fr !important;
+  }
+
+  .stats,
+  .approval-map-grid,
+  .cards,
+  .news-grid,
+  .footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  section {
+    padding-inline: 5% !important;
+  }
+
+  .hero-btns,
+  .stats,
+  .approval-map-grid,
+  .cards,
+  .news-grid,
+  .footer-grid,
+  .form-row,
+  .news-actions {
+    grid-template-columns: 1fr !important;
+  }
+
+  .hero-btns .btn,
+  .contact-form button,
+  .news-action {
+    width: 100%;
+  }
+
+  .contact-item,
+  [dir="rtl"] .contact-item {
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .footer-links ul li a,
+  .footer-contact p,
+  .developer-links a {
+    align-items: flex-start;
+  }
+
+  .chat-window {
+    width: calc(100vw - 24px) !important;
+    right: 12px !important;
+    left: 12px !important;
+    bottom: 82px !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .logo img {
+    height: 34px;
+  }
+
+  .company-name-text {
+    max-width: calc(100vw - 180px) !important;
+  }
+
+  .quote-btn-nav:not(.mobile-quote-fix) {
+    display: none !important;
+  }
+
+  .lang-btn,
+  .toggle-btn,
+  .menu-btn {
+    flex: 0 0 38px;
+    width: 38px;
+    height: 38px;
+  }
+}
