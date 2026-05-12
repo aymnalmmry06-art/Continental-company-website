@@ -8,6 +8,32 @@ const firebaseConfig = {
 let database = null;
 let activeNewsRefs = [];
 const NEWS_PATHS = ["news", "posts", "articles"];
+const FALLBACK_NEWS_ITEMS = [
+  {
+    id: "continental-type-approval-yemen",
+    title_en: "Type Approval Support for the Yemeni Market",
+    title_ar: "دعم اعتماد النوع للسوق اليمني",
+    content_en:
+      "Continental helps manufacturers and importers prepare technical files, review documents, and follow Type Approval submissions with the competent authority in Yemen.",
+    content_ar:
+      "تساعد كونتيننتال المصنعين والمستوردين على تجهيز الملفات الفنية ومراجعة الوثائق ومتابعة معاملات اعتماد النوع لدى الجهة المختصة في اليمن.",
+    img: "form.jpg",
+    type: "service",
+    timestamp: 1714939200000,
+  },
+  {
+    id: "mtit-regulatory-compliance",
+    title_en: "Regulatory Compliance with MTIT Requirements",
+    title_ar: "الامتثال التنظيمي لمتطلبات وزارة الاتصالات",
+    content_en:
+      "Our team supports documentation checks, application preparation, and practical guidance for telecom and wireless equipment approvals.",
+    content_ar:
+      "يدعم فريقنا فحص الوثائق وتجهيز الطلبات وتقديم الإرشاد العملي لاعتمادات أجهزة الاتصالات والمعدات اللاسلكية.",
+    img: "ministry.png",
+    type: "update",
+    timestamp: 1714852800000,
+  },
+];
 let latestNewsItems = new Map();
 let pendingNewsId = new URLSearchParams(window.location.search).get("news");
 
@@ -33,8 +59,12 @@ let currentLang = "en";
 let slowConnectionTimer = null;
 
 function getStoredLanguage() {
-  const savedLang = localStorage.getItem("continentalLang");
-  return savedLang === "ar" || savedLang === "en" ? savedLang : "en";
+  try {
+    const savedLang = localStorage.getItem("continentalLang");
+    return savedLang === "ar" || savedLang === "en" ? savedLang : "en";
+  } catch (error) {
+    return "en";
+  }
 }
 
 function updateConnectionCopy(mode) {
@@ -123,7 +153,7 @@ function registerServiceWorker() {
   if (!("serviceWorker" in navigator)) return;
 
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("sw.js?v=6").catch(() => {});
+    navigator.serviceWorker.register("sw.js?v=7").catch(() => {});
   });
 }
 
@@ -171,7 +201,9 @@ function applyLanguage(lang, options = {}) {
   currentLang = lang === "ar" ? "ar" : "en";
   document.documentElement.dir = currentLang === "ar" ? "rtl" : "ltr";
   document.documentElement.lang = currentLang;
-  localStorage.setItem("continentalLang", currentLang);
+  try {
+    localStorage.setItem("continentalLang", currentLang);
+  } catch (error) {}
 
   const langBtn = document.getElementById("lang-btn");
   if (langBtn) {
@@ -496,6 +528,42 @@ function createNewsCard(item) {
   return card;
 }
 
+function drawNewsItems(container, items) {
+  const normalizedItems = items
+    .map(normalizeNewsItem)
+    .filter((item) => item.title || item.content)
+    .sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0))
+    .slice(0, 12);
+
+  latestNewsItems = new Map(normalizedItems.map((item) => [item.id, item]));
+  container.innerHTML = "";
+
+  if (!normalizedItems.length) {
+    const empty = document.createElement("div");
+    empty.className = "news-empty-state";
+    empty.innerHTML = `<span class="news-empty-logo"><img src="logo.png" alt="Continental Logo"></span><strong>${
+      currentLang === "ar" ? "لا توجد أخبار في الوقت الحالي" : "No news at the moment"
+    }</strong>`;
+    container.appendChild(empty);
+    return;
+  }
+
+  const fragment = document.createDocumentFragment();
+  normalizedItems.forEach((item) => fragment.appendChild(createNewsCard(item)));
+  container.appendChild(fragment);
+
+  document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+
+  if (pendingNewsId && latestNewsItems.has(pendingNewsId)) {
+    openNewsItem(latestNewsItems.get(pendingNewsId), false);
+    pendingNewsId = null;
+  }
+}
+
+function renderFallbackNews(container) {
+  drawNewsItems(container, FALLBACK_NEWS_ITEMS);
+}
+
 function renderNews() {
   const container = document.getElementById("news-container");
   if (!container) return;
@@ -512,13 +580,7 @@ function renderNews() {
   container.appendChild(loading);
 
   if (!database) {
-    container.innerHTML = "";
-    const message = document.createElement("div");
-    message.className = "news-empty-state";
-    message.innerHTML = `<span class="news-empty-logo"><img src="logo.png" alt="Continental Logo"></span><strong>${
-      currentLang === "ar" ? "لا توجد أخبار في الوقت الحالي" : "No news at the moment"
-    }</strong>`;
-    container.appendChild(message);
+    renderFallbackNews(container);
     return;
   }
   const allItems = new Map();
@@ -526,36 +588,15 @@ function renderNews() {
 
   const draw = () => {
     const items = Array.from(allItems.values())
-      .map(normalizeNewsItem)
-      .sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0))
-      .slice(0, 12);
-    latestNewsItems = new Map(items.map((item) => [item.id, item]));
-
-    container.innerHTML = "";
+      .map(normalizeNewsItem);
 
     if (items.length) {
-      const fragment = document.createDocumentFragment();
-      items.forEach((item) => fragment.appendChild(createNewsCard(item)));
-      container.appendChild(fragment);
-
-      document
-        .querySelectorAll(".reveal")
-        .forEach((el) => observer.observe(el));
-
-      if (pendingNewsId && latestNewsItems.has(pendingNewsId)) {
-        openNewsItem(latestNewsItems.get(pendingNewsId), false);
-        pendingNewsId = null;
-      }
+      drawNewsItems(container, items);
       return;
     }
 
     if (completedInitialLoads >= NEWS_PATHS.length) {
-        const empty = document.createElement("div");
-        empty.className = "news-empty-state";
-        empty.innerHTML = `<span class="news-empty-logo"><img src="logo.png" alt="Continental Logo"></span><strong>${
-          currentLang === "ar" ? "لا توجد أخبار في الوقت الحالي" : "No news at the moment"
-        }</strong>`;
-        container.appendChild(empty);
+      renderFallbackNews(container);
     }
   };
 
@@ -580,14 +621,7 @@ function renderNews() {
         console.error("Firebase Error:", error);
         completedInitialLoads += 1;
         if (completedInitialLoads >= NEWS_PATHS.length && allItems.size === 0) {
-          container.innerHTML = "";
-          const errorMessage = document.createElement("p");
-          errorMessage.style.textAlign = "center";
-          errorMessage.style.gridColumn = "1/-1";
-          errorMessage.style.color = "#ff6b6b";
-          errorMessage.textContent =
-            currentLang === "ar" ? "حدث خطأ في الاتصال بالأخبار." : "News connection error.";
-          container.appendChild(errorMessage);
+          renderFallbackNews(container);
         }
       },
     );
@@ -803,8 +837,9 @@ document
 
 // --- 13. Hero Slider ---
 let slides = document.querySelectorAll(".slide");
+const sliderContainer = document.querySelector(".slider-container");
 let slideIdx = 0;
-if (slides.length > 0) {
+if (slides.length > 0 && sliderContainer?.dataset.showAll !== "true") {
   const sliderInterval = setInterval(() => {
     slides[slideIdx].classList.remove("active");
     slideIdx = (slideIdx + 1) % slides.length;
@@ -816,11 +851,7 @@ if (slides.length > 0) {
 
 // --- 14. Chatbot Logic (Free Local Engine) ---
 const USE_FREE_LOCAL_ASSISTANT = true;
-const CHAT_API_URL =
-  window.CONTINENTAL_CHAT_API_URL ||
-  (window.location.port === "8787"
-    ? "/api/chat"
-    : "http://127.0.0.1:8787/api/chat");
+const CHAT_API_URL = window.CONTINENTAL_CHAT_API_URL || "";
 
 function toggleChat(event) {
   if (event) event.stopPropagation();
