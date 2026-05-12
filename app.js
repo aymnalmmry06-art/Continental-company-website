@@ -32,6 +32,11 @@ if (typeof firebase !== "undefined" && typeof firebase.database === "function") 
 let currentLang = "en";
 let slowConnectionTimer = null;
 
+function getStoredLanguage() {
+  const savedLang = localStorage.getItem("continentalLang");
+  return savedLang === "ar" || savedLang === "en" ? savedLang : "en";
+}
+
 function updateConnectionCopy(mode) {
   const titleAr = document.getElementById("connectionTitleAr");
   const textAr = document.getElementById("connectionTextAr");
@@ -162,13 +167,20 @@ function setTranslatedContent(el, value) {
 }
 
 // --- 1. Language Toggle Logic ---
-function toggleLanguage() {
-  currentLang = currentLang === "en" ? "ar" : "en";
+function applyLanguage(lang, options = {}) {
+  currentLang = lang === "ar" ? "ar" : "en";
   document.documentElement.dir = currentLang === "ar" ? "rtl" : "ltr";
   document.documentElement.lang = currentLang;
+  localStorage.setItem("continentalLang", currentLang);
 
   const langBtn = document.getElementById("lang-btn");
-  if (langBtn) langBtn.innerText = currentLang === "en" ? "AR" : "EN";
+  if (langBtn) {
+    langBtn.innerText = currentLang === "en" ? "AR" : "EN";
+    langBtn.setAttribute(
+      "aria-label",
+      currentLang === "en" ? "Switch to Arabic" : "التبديل إلى الإنجليزية",
+    );
+  }
 
   const elements = document.querySelectorAll("[data-en]");
   elements.forEach((el) => {
@@ -188,13 +200,20 @@ function toggleLanguage() {
     if (label) el.setAttribute("aria-label", label);
   });
 
-  showToast(
-    currentLang === "ar"
-      ? "تم تغيير اللغة إلى العربية"
-      : "Language changed to English",
-  );
+  if (options.showToast !== false) {
+    showToast(
+      currentLang === "ar"
+        ? "تم تغيير اللغة إلى العربية"
+        : "Language changed to English",
+    );
+  }
 
   renderNews();
+}
+
+function toggleLanguage(event) {
+  if (event) event.preventDefault();
+  applyLanguage(currentLang === "en" ? "ar" : "en");
 }
 
 // --- 2. Menu Toggle Logic (Updated with Click-Outside) ---
@@ -615,6 +634,12 @@ window.addEventListener("click", function (e) {
 
 // --- 7. Preloader & Initialization ---
 window.addEventListener("DOMContentLoaded", () => {
+  applyLanguage(getStoredLanguage(), { showToast: false });
+
+  document
+    .getElementById("lang-btn")
+    ?.addEventListener("click", toggleLanguage);
+
   const logoOverlay = document.getElementById("logo-overlay");
   const preloader = document.getElementById("preloader");
   const mainContent = document.getElementById("main-content");
@@ -725,7 +750,9 @@ window.addEventListener("scroll", () => {
 updateActiveNavLink();
 
 if (backToTop) {
-  backToTop.onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
+  backToTop.addEventListener("click", () =>
+    window.scrollTo({ top: 0, behavior: "smooth" }),
+  );
 }
 
 // --- 11. Statistics Counter Logic ---
@@ -1128,3 +1155,12 @@ function getFreeAssistantReply(message) {
 
 setupConnectionMonitor();
 registerServiceWorker();
+
+window.toggleLanguage = toggleLanguage;
+window.toggleMenu = toggleMenu;
+window.toggleMode = toggleMode;
+window.openModal = openModal;
+window.closeModal = closeModal;
+window.closeStory = closeStory;
+window.toggleChat = toggleChat;
+window.sendChatMessage = sendChatMessage;

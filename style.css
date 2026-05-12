@@ -4737,3 +4737,48 @@ table {
   pointer-events: auto;
   transform: translateY(0);
 }
+
+/* Final floating-action placement */
+#backToTop {
+  right: 104px;
+  bottom: 102px;
+  border: 0;
+  appearance: none;
+}
+
+[dir="rtl"] #backToTop {
+  right: auto;
+  left: 104px;
+}
+
+[dir="rtl"] .chat-widget,
+[dir="rtl"] .whatsapp-btn {
+  right: auto;
+  left: 24px;
+}
+
+@media (max-width: 968px) {
+  #backToTop {
+    right: 96px;
+    bottom: 103px;
+  }
+
+  [dir="rtl"] #backToTop {
+    right: auto;
+    left: 96px;
+  }
+}
+
+@media (max-width: 520px) {
+  #backToTop {
+    width: 44px;
+    height: 44px;
+    right: 94px;
+    bottom: 104px;
+  }
+
+  [dir="rtl"] #backToTop {
+    right: auto;
+    left: 94px;
+  }
+}

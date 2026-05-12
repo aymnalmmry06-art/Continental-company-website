@@ -156,7 +156,14 @@
           Request a Quote
         </button>
 
-        <div class="lang-btn" onclick="toggleLanguage()" id="lang-btn">AR</div>
+        <button
+          type="button"
+          class="lang-btn"
+          id="lang-btn"
+          aria-label="Switch to Arabic"
+        >
+          AR
+        </button>
 
         <div class="toggle-btn" onclick="toggleMode()">
           <i class="fas fa-moon" id="theme-icon"></i>
@@ -345,7 +352,15 @@
       </div>
     </div>
 
-    <div id="backToTop"><i class="fas fa-arrow-up"></i></div>
+    <button
+      type="button"
+      id="backToTop"
+      aria-label="Back to top"
+      data-en-label="Back to top"
+      data-ar-label="العودة إلى الأعلى"
+    >
+      <i class="fas fa-arrow-up"></i>
+    </button>
 
     <main id="main-content">
       <section class="hero">
