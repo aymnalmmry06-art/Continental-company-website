@@ -4,6 +4,8 @@
 const firebaseConfig = {
   databaseURL: "https://continental-f76a8-default-rtdb.firebaseio.com/",
 };
+const FIREBASE_REST_URL =
+  "https://continental-f76a8-default-rtdb.firebaseio.com";
 
 let database = null;
 let activeNewsRefs = [];
@@ -123,7 +125,7 @@ function registerServiceWorker() {
   if (!("serviceWorker" in navigator)) return;
 
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("sw.js?v=6").catch(() => {});
+    navigator.serviceWorker.register("sw.js?v=8").catch(() => {});
   });
 }
 
@@ -496,6 +498,61 @@ function createNewsCard(item) {
   return card;
 }
 
+function drawNewsItems(container, items) {
+  const normalizedItems = items
+    .map((item) => normalizeNewsItem(item))
+    .filter((item) => item.title || item.content)
+    .sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0))
+    .slice(0, 12);
+
+  latestNewsItems = new Map(normalizedItems.map((item) => [item.id, item]));
+  container.innerHTML = "";
+
+  if (!normalizedItems.length) {
+    const empty = document.createElement("div");
+    empty.className = "news-empty-state";
+    empty.innerHTML = `<span class="news-empty-logo"><img src="logo.png" alt="Continental Logo"></span><strong>${
+      currentLang === "ar" ? "لا توجد أخبار في الوقت الحالي" : "No news at the moment"
+    }</strong>`;
+    container.appendChild(empty);
+    return;
+  }
+
+  const fragment = document.createDocumentFragment();
+  normalizedItems.forEach((item) => fragment.appendChild(createNewsCard(item)));
+  container.appendChild(fragment);
+  document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+
+  if (pendingNewsId && latestNewsItems.has(pendingNewsId)) {
+    openNewsItem(latestNewsItems.get(pendingNewsId), false);
+    pendingNewsId = null;
+  }
+}
+
+async function renderNewsFromRest(container) {
+  const snapshots = await Promise.all(
+    NEWS_PATHS.map((path) =>
+      fetch(`${FIREBASE_REST_URL}/${path}.json`)
+        .then((response) => (response.ok ? response.json() : null))
+        .catch(() => null),
+    ),
+  );
+
+  const items = [];
+  snapshots.forEach((snapshot, pathIndex) => {
+    if (!snapshot || typeof snapshot !== "object") return;
+    Object.entries(snapshot).forEach(([key, value]) => {
+      if (!value || typeof value !== "object") return;
+      items.push({
+        ...value,
+        id: `${NEWS_PATHS[pathIndex]}-${key}`,
+      });
+    });
+  });
+
+  drawNewsItems(container, items);
+}
+
 function renderNews() {
   const container = document.getElementById("news-container");
   if (!container) return;
@@ -512,50 +569,22 @@ function renderNews() {
   container.appendChild(loading);
 
   if (!database) {
-    container.innerHTML = "";
-    const message = document.createElement("div");
-    message.className = "news-empty-state";
-    message.innerHTML = `<span class="news-empty-logo"><img src="logo.png" alt="Continental Logo"></span><strong>${
-      currentLang === "ar" ? "لا توجد أخبار في الوقت الحالي" : "No news at the moment"
-    }</strong>`;
-    container.appendChild(message);
+    renderNewsFromRest(container).catch(() => drawNewsItems(container, []));
     return;
   }
   const allItems = new Map();
   let completedInitialLoads = 0;
 
   const draw = () => {
-    const items = Array.from(allItems.values())
-      .map(normalizeNewsItem)
-      .sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0))
-      .slice(0, 12);
-    latestNewsItems = new Map(items.map((item) => [item.id, item]));
-
-    container.innerHTML = "";
+    const items = Array.from(allItems.values()).map(normalizeNewsItem);
 
     if (items.length) {
-      const fragment = document.createDocumentFragment();
-      items.forEach((item) => fragment.appendChild(createNewsCard(item)));
-      container.appendChild(fragment);
-
-      document
-        .querySelectorAll(".reveal")
-        .forEach((el) => observer.observe(el));
-
-      if (pendingNewsId && latestNewsItems.has(pendingNewsId)) {
-        openNewsItem(latestNewsItems.get(pendingNewsId), false);
-        pendingNewsId = null;
-      }
+      drawNewsItems(container, items);
       return;
     }
 
     if (completedInitialLoads >= NEWS_PATHS.length) {
-        const empty = document.createElement("div");
-        empty.className = "news-empty-state";
-        empty.innerHTML = `<span class="news-empty-logo"><img src="logo.png" alt="Continental Logo"></span><strong>${
-          currentLang === "ar" ? "لا توجد أخبار في الوقت الحالي" : "No news at the moment"
-        }</strong>`;
-        container.appendChild(empty);
+      renderNewsFromRest(container).catch(() => drawNewsItems(container, []));
     }
   };
 
@@ -580,14 +609,7 @@ function renderNews() {
         console.error("Firebase Error:", error);
         completedInitialLoads += 1;
         if (completedInitialLoads >= NEWS_PATHS.length && allItems.size === 0) {
-          container.innerHTML = "";
-          const errorMessage = document.createElement("p");
-          errorMessage.style.textAlign = "center";
-          errorMessage.style.gridColumn = "1/-1";
-          errorMessage.style.color = "#ff6b6b";
-          errorMessage.textContent =
-            currentLang === "ar" ? "حدث خطأ في الاتصال بالأخبار." : "News connection error.";
-          container.appendChild(errorMessage);
+          renderNewsFromRest(container).catch(() => drawNewsItems(container, []));
         }
       },
     );
@@ -635,10 +657,6 @@ window.addEventListener("click", function (e) {
 // --- 7. Preloader & Initialization ---
 window.addEventListener("DOMContentLoaded", () => {
   applyLanguage(getStoredLanguage(), { showToast: false });
-
-  document
-    .getElementById("lang-btn")
-    ?.addEventListener("click", toggleLanguage);
 
   const logoOverlay = document.getElementById("logo-overlay");
   const preloader = document.getElementById("preloader");
@@ -803,8 +821,9 @@ document
 
 // --- 13. Hero Slider ---
 let slides = document.querySelectorAll(".slide");
+const sliderContainer = document.querySelector(".slider-container");
 let slideIdx = 0;
-if (slides.length > 0) {
+if (slides.length > 0 && sliderContainer?.dataset.showAll !== "true") {
   const sliderInterval = setInterval(() => {
     slides[slideIdx].classList.remove("active");
     slideIdx = (slideIdx + 1) % slides.length;
