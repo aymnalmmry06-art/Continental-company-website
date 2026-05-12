@@ -1,4 +1,4 @@
-const CACHE_NAME = "continental-site-v8-20260512";
+const CACHE_NAME = "continental-site-v9-20260512";
 const CORE_ASSETS = [
   "./",
   "./index.html",

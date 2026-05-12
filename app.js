@@ -125,7 +125,7 @@ function registerServiceWorker() {
   if (!("serviceWorker" in navigator)) return;
 
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("sw.js?v=8").catch(() => {});
+    navigator.serviceWorker.register("sw.js?v=9").catch(() => {});
   });
 }
 
@@ -217,6 +217,8 @@ function toggleLanguage(event) {
   if (event) event.preventDefault();
   applyLanguage(currentLang === "en" ? "ar" : "en");
 }
+
+window.toggleLanguage = toggleLanguage;
 
 // --- 2. Menu Toggle Logic (Updated with Click-Outside) ---
 function toggleMenu() {
@@ -821,9 +823,8 @@ document
 
 // --- 13. Hero Slider ---
 let slides = document.querySelectorAll(".slide");
-const sliderContainer = document.querySelector(".slider-container");
 let slideIdx = 0;
-if (slides.length > 0 && sliderContainer?.dataset.showAll !== "true") {
+if (slides.length > 0) {
   const sliderInterval = setInterval(() => {
     slides[slideIdx].classList.remove("active");
     slideIdx = (slideIdx + 1) % slides.length;
