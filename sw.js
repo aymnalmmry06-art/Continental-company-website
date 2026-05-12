@@ -1,4 +1,4 @@
-const CACHE_NAME = "continental-site-v7-20260512";
+const CACHE_NAME = "continental-site-v6-20260511";
 const CORE_ASSETS = [
   "./",
   "./index.html",
@@ -12,9 +12,7 @@ const CORE_ASSETS = [
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) =>
-      Promise.allSettled(CORE_ASSETS.map((asset) => cache.add(asset))),
-    ),
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(CORE_ASSETS)),
   );
   self.skipWaiting();
 });
@@ -53,17 +51,7 @@ self.addEventListener("fetch", (event) => {
           caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
           return response;
         })
-        .catch(() =>
-          caches.match(request).then((cached) => {
-            if (cached) return cached;
-            if (request.mode === "navigate") {
-              return caches
-                .match("./index.html")
-                .then((fallback) => fallback || Response.error());
-            }
-            return Response.error();
-          }),
-        ),
+        .catch(() => caches.match(request).then((cached) => cached || caches.match("./index.html"))),
     );
     return;
   }
@@ -78,14 +66,7 @@ self.addEventListener("fetch", (event) => {
           caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
           return response;
         })
-        .catch(() => {
-          if (request.destination === "image") {
-            return caches
-              .match("./logo.png")
-              .then((fallback) => fallback || Response.error());
-          }
-          return Response.error();
-        });
+        .catch(() => caches.match("./index.html"));
     }),
   );
 });
