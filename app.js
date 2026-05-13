@@ -4,8 +4,6 @@
 const firebaseConfig = {
   databaseURL: "https://continental-f76a8-default-rtdb.firebaseio.com/",
 };
-const FIREBASE_REST_URL =
-  "https://continental-f76a8-default-rtdb.firebaseio.com";
 
 let database = null;
 let activeNewsRefs = [];
@@ -33,11 +31,6 @@ if (typeof firebase !== "undefined" && typeof firebase.database === "function") 
 
 let currentLang = "en";
 let slowConnectionTimer = null;
-
-function getStoredLanguage() {
-  const savedLang = localStorage.getItem("continentalLang");
-  return savedLang === "ar" || savedLang === "en" ? savedLang : "en";
-}
 
 function updateConnectionCopy(mode) {
   const titleAr = document.getElementById("connectionTitleAr");
@@ -125,7 +118,7 @@ function registerServiceWorker() {
   if (!("serviceWorker" in navigator)) return;
 
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("sw.js?v=10").catch(() => {});
+    navigator.serviceWorker.register("sw.js").catch(() => {});
   });
 }
 
@@ -169,20 +162,13 @@ function setTranslatedContent(el, value) {
 }
 
 // --- 1. Language Toggle Logic ---
-function applyLanguage(lang, options = {}) {
-  currentLang = lang === "ar" ? "ar" : "en";
+function toggleLanguage() {
+  currentLang = currentLang === "en" ? "ar" : "en";
   document.documentElement.dir = currentLang === "ar" ? "rtl" : "ltr";
   document.documentElement.lang = currentLang;
-  localStorage.setItem("continentalLang", currentLang);
 
   const langBtn = document.getElementById("lang-btn");
-  if (langBtn) {
-    langBtn.innerText = currentLang === "en" ? "AR" : "EN";
-    langBtn.setAttribute(
-      "aria-label",
-      currentLang === "en" ? "Switch to Arabic" : "التبديل إلى الإنجليزية",
-    );
-  }
+  if (langBtn) langBtn.innerText = currentLang === "en" ? "AR" : "EN";
 
   const elements = document.querySelectorAll("[data-en]");
   elements.forEach((el) => {
@@ -202,23 +188,14 @@ function applyLanguage(lang, options = {}) {
     if (label) el.setAttribute("aria-label", label);
   });
 
-  if (options.showToast !== false) {
-    showToast(
-      currentLang === "ar"
-        ? "تم تغيير اللغة إلى العربية"
-        : "Language changed to English",
-    );
-  }
+  showToast(
+    currentLang === "ar"
+      ? "تم تغيير اللغة إلى العربية"
+      : "Language changed to English",
+  );
 
   renderNews();
 }
-
-function toggleLanguage(event) {
-  if (event) event.preventDefault();
-  applyLanguage(currentLang === "en" ? "ar" : "en");
-}
-
-window.toggleLanguage = toggleLanguage;
 
 // --- 2. Menu Toggle Logic (Updated with Click-Outside) ---
 function toggleMenu() {
@@ -500,61 +477,6 @@ function createNewsCard(item) {
   return card;
 }
 
-function drawNewsItems(container, items) {
-  const normalizedItems = items
-    .map((item) => normalizeNewsItem(item))
-    .filter((item) => item.title || item.content)
-    .sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0))
-    .slice(0, 12);
-
-  latestNewsItems = new Map(normalizedItems.map((item) => [item.id, item]));
-  container.innerHTML = "";
-
-  if (!normalizedItems.length) {
-    const empty = document.createElement("div");
-    empty.className = "news-empty-state";
-    empty.innerHTML = `<span class="news-empty-logo"><img src="logo.png" alt="Continental Logo"></span><strong>${
-      currentLang === "ar" ? "لا توجد أخبار في الوقت الحالي" : "No news at the moment"
-    }</strong>`;
-    container.appendChild(empty);
-    return;
-  }
-
-  const fragment = document.createDocumentFragment();
-  normalizedItems.forEach((item) => fragment.appendChild(createNewsCard(item)));
-  container.appendChild(fragment);
-  document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
-
-  if (pendingNewsId && latestNewsItems.has(pendingNewsId)) {
-    openNewsItem(latestNewsItems.get(pendingNewsId), false);
-    pendingNewsId = null;
-  }
-}
-
-async function renderNewsFromRest(container) {
-  const snapshots = await Promise.all(
-    NEWS_PATHS.map((path) =>
-      fetch(`${FIREBASE_REST_URL}/${path}.json`)
-        .then((response) => (response.ok ? response.json() : null))
-        .catch(() => null),
-    ),
-  );
-
-  const items = [];
-  snapshots.forEach((snapshot, pathIndex) => {
-    if (!snapshot || typeof snapshot !== "object") return;
-    Object.entries(snapshot).forEach(([key, value]) => {
-      if (!value || typeof value !== "object") return;
-      items.push({
-        ...value,
-        id: `${NEWS_PATHS[pathIndex]}-${key}`,
-      });
-    });
-  });
-
-  drawNewsItems(container, items);
-}
-
 function renderNews() {
   const container = document.getElementById("news-container");
   if (!container) return;
@@ -571,22 +493,50 @@ function renderNews() {
   container.appendChild(loading);
 
   if (!database) {
-    renderNewsFromRest(container).catch(() => drawNewsItems(container, []));
+    container.innerHTML = "";
+    const message = document.createElement("div");
+    message.className = "news-empty-state";
+    message.innerHTML = `<span class="news-empty-logo"><img src="logo.png" alt="Continental Logo"></span><strong>${
+      currentLang === "ar" ? "لا توجد أخبار في الوقت الحالي" : "No news at the moment"
+    }</strong>`;
+    container.appendChild(message);
     return;
   }
   const allItems = new Map();
   let completedInitialLoads = 0;
 
   const draw = () => {
-    const items = Array.from(allItems.values()).map(normalizeNewsItem);
+    const items = Array.from(allItems.values())
+      .map(normalizeNewsItem)
+      .sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0))
+      .slice(0, 12);
+    latestNewsItems = new Map(items.map((item) => [item.id, item]));
+
+    container.innerHTML = "";
 
     if (items.length) {
-      drawNewsItems(container, items);
+      const fragment = document.createDocumentFragment();
+      items.forEach((item) => fragment.appendChild(createNewsCard(item)));
+      container.appendChild(fragment);
+
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => observer.observe(el));
+
+      if (pendingNewsId && latestNewsItems.has(pendingNewsId)) {
+        openNewsItem(latestNewsItems.get(pendingNewsId), false);
+        pendingNewsId = null;
+      }
       return;
     }
 
     if (completedInitialLoads >= NEWS_PATHS.length) {
-      renderNewsFromRest(container).catch(() => drawNewsItems(container, []));
+        const empty = document.createElement("div");
+        empty.className = "news-empty-state";
+        empty.innerHTML = `<span class="news-empty-logo"><img src="logo.png" alt="Continental Logo"></span><strong>${
+          currentLang === "ar" ? "لا توجد أخبار في الوقت الحالي" : "No news at the moment"
+        }</strong>`;
+        container.appendChild(empty);
     }
   };
 
@@ -594,7 +544,7 @@ function renderNews() {
     const newsRef = database.ref(path);
     activeNewsRefs.push(newsRef);
 
-    newsRef.limitToLast(12).on(
+    newsRef.orderByChild("timestamp").limitToLast(12).on(
       "value",
       (snapshot) => {
         if (snapshot.exists()) {
@@ -611,7 +561,14 @@ function renderNews() {
         console.error("Firebase Error:", error);
         completedInitialLoads += 1;
         if (completedInitialLoads >= NEWS_PATHS.length && allItems.size === 0) {
-          renderNewsFromRest(container).catch(() => drawNewsItems(container, []));
+          container.innerHTML = "";
+          const errorMessage = document.createElement("p");
+          errorMessage.style.textAlign = "center";
+          errorMessage.style.gridColumn = "1/-1";
+          errorMessage.style.color = "#ff6b6b";
+          errorMessage.textContent =
+            currentLang === "ar" ? "حدث خطأ في الاتصال بالأخبار." : "News connection error.";
+          container.appendChild(errorMessage);
         }
       },
     );
@@ -658,28 +615,15 @@ window.addEventListener("click", function (e) {
 
 // --- 7. Preloader & Initialization ---
 window.addEventListener("DOMContentLoaded", () => {
-  applyLanguage(getStoredLanguage(), { showToast: false });
-
   const logoOverlay = document.getElementById("logo-overlay");
   const preloader = document.getElementById("preloader");
   const mainContent = document.getElementById("main-content");
   const introSeen = sessionStorage.getItem("continentalIntroSeen") === "true";
-  const showMainContent = () => {
-    document.body.classList.remove("intro-pending");
-    document.body.classList.add("intro-ready");
-    if (mainContent) mainContent.style.visibility = "visible";
-    document.querySelectorAll(".reveal, .stats").forEach((el) => {
-      el.classList.add("active");
-      if (el.classList.contains("stats") || el.querySelector(".counter")) {
-        startCounters(el);
-      }
-    });
-  };
 
   if (introSeen) {
     if (logoOverlay) logoOverlay.style.display = "none";
     if (preloader) preloader.style.display = "none";
-    showMainContent();
+    if (mainContent) mainContent.style.visibility = "visible";
     renderNews();
     return;
   }
@@ -695,7 +639,7 @@ window.addEventListener("DOMContentLoaded", () => {
   setTimeout(() => {
     if (preloader) {
       preloader.style.opacity = "0";
-      showMainContent();
+      if (mainContent) mainContent.style.visibility = "visible";
       sessionStorage.setItem("continentalIntroSeen", "true");
       renderNews();
       setTimeout(() => (preloader.style.display = "none"), 600);
@@ -734,12 +678,6 @@ const pageSections = navLinks
   .filter(Boolean);
 let ticking = false;
 
-function updateBackToTopVisibility() {
-  if (backToTop) {
-    backToTop.classList.toggle("is-visible", window.pageYOffset > 160);
-  }
-}
-
 function updateActiveNavLink() {
   const anchorLine = window.scrollY + Math.max(120, window.innerHeight * 0.22);
   let activeSection = pageSections[0];
@@ -757,7 +695,12 @@ function updateActiveNavLink() {
 window.addEventListener("scroll", () => {
   if (!ticking) {
     window.requestAnimationFrame(() => {
-      updateBackToTopVisibility();
+      if (window.pageYOffset > 400) {
+        if (backToTop) backToTop.style.display = "flex";
+      } else {
+        if (backToTop) backToTop.style.display = "none";
+      }
+
       if (window.scrollY > 50) {
         if (header) header.classList.add("scrolled");
       } else {
@@ -770,13 +713,10 @@ window.addEventListener("scroll", () => {
   }
 });
 
-updateBackToTopVisibility();
 updateActiveNavLink();
 
 if (backToTop) {
-  backToTop.addEventListener("click", () =>
-    window.scrollTo({ top: 0, behavior: "smooth" }),
-  );
+  backToTop.onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 // --- 11. Statistics Counter Logic ---
@@ -787,7 +727,6 @@ const startCounters = (el) => {
     counter.dataset.started = "true";
 
     const target = +counter.getAttribute("data-target");
-    counter.innerText = "0";
     const increment = target / 60; // سرعة العداد
 
     const updateCount = () => {
@@ -1025,8 +964,8 @@ function getFreeAssistantReply(message) {
       en: "Lead time depends on the authority, document completeness, and review queue. It often takes several working weeks, and may take longer if reports are incomplete or clarifications/samples are requested. A clean submission file reduces delays.",
     },
     price: {
-      ar: "يسعدنا مساعدتك بكل احترافية. تختلف الأسعار حسب نوع الجهاز، عدد الموديلات، والوثائق المتوفرة، لذلك نفضل مراجعة التفاصيل أولاً لنقدم لك عرضاً دقيقاً ومناسباً. يمكنك إرسال بيانات الجهاز عبر واتساب: +967 772299400 أو عبر البريد الإلكتروني: Continental231@gmail.com، وسيتواصل معك فريق كونتيننتال في أقرب وقت.",
-      en: "We would be happy to assist you professionally. Pricing depends on the device type, number of models, and available documents, so we prefer to review the details first and provide an accurate, suitable quotation. Please send your device details by WhatsApp: +967 772299400 or email: Continental231@gmail.com, and the Continental team will get back to you soon.",
+      ar: "تختلف التكلفة حسب نوع الجهاز والخدمة المطلوبة. للحصول على عرض سعر دقيق، اضغط على زر طلب تسعيرة أو راسلنا عبر واتساب.",
+      en: "Pricing depends on the device type and required service. For an accurate quote, use the Request a Quote button or contact us on WhatsApp.",
     },
     renewal: {
       ar: "نعم، نوفر خدمة تجديد شهادات اعتماد النوع. يفضل بدء التجديد قبل انتهاء الشهادة بوقت كافٍ، خصوصًا إذا تغير الموديل أو البرنامج أو مكونات الراديو أو تقارير الاختبار.",
@@ -1179,12 +1118,3 @@ function getFreeAssistantReply(message) {
 
 setupConnectionMonitor();
 registerServiceWorker();
-
-window.toggleLanguage = toggleLanguage;
-window.toggleMenu = toggleMenu;
-window.toggleMode = toggleMode;
-window.openModal = openModal;
-window.closeModal = closeModal;
-window.closeStory = closeStory;
-window.toggleChat = toggleChat;
-window.sendChatMessage = sendChatMessage;

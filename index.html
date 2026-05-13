@@ -13,14 +13,14 @@
     />
     <meta
       property="og:title"
-      content="Continental | Type Approval & Regulatory Compliance in Yemen"
+      content="Continental | The Gold Standard for Type Approval in Yemen"
     />
     <meta property="og:image" content="logo.png" />
     <meta name="theme-color" content="#0f1b4d" />
 
-    <title>Continental | Type Approval & Regulatory Compliance in Yemen</title>
+    <title>Continental | The Gold Standard for Type Approval in Yemen</title>
 
-    <link rel="stylesheet" href="style.css?v=10" />
+    <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -41,7 +41,7 @@
     ></script>
   </head>
 
-  <body class="intro-pending">
+  <body>
     <div id="toast-container"></div>
 
     <div id="logo-overlay">
@@ -156,15 +156,7 @@
           Request a Quote
         </button>
 
-        <button
-          type="button"
-          class="lang-btn"
-          id="lang-btn"
-          aria-label="Switch to Arabic"
-          onclick="toggleLanguage(event)"
-        >
-          AR
-        </button>
+        <div class="lang-btn" onclick="toggleLanguage()" id="lang-btn">AR</div>
 
         <div class="toggle-btn" onclick="toggleMode()">
           <i class="fas fa-moon" id="theme-icon"></i>
@@ -353,44 +345,33 @@
       </div>
     </div>
 
-    <button
-      type="button"
-      id="backToTop"
-      aria-label="Back to top"
-      data-en-label="Back to top"
-      data-ar-label="العودة إلى الأعلى"
-      onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
-    >
-      <i class="fas fa-arrow-up"></i>
-    </button>
+    <div id="backToTop"><i class="fas fa-arrow-up"></i></div>
 
-    <main id="main-content">
+    <main id="main-content" style="visibility: hidden">
       <section class="hero">
         <div class="hero-text reveal">
           <h1
             data-allow-html="true"
-            data-en="Type Approval & Regulatory Compliance <br /><span>for the Yemeni Market</span>"
-            data-ar="اعتماد النوع والامتثال التنظيمي <br /><span>للسوق اليمني</span>"
+            data-en="The Gold Standard for <br /><span>Type Approval in Yemen</span>"
+            data-ar="المعيار الذهبي لـ <br /><span>اعتماد النوع في اليمن</span>"
           >
-            Type Approval & Regulatory Compliance
-            <br /><span>for the Yemeni Market</span>
+            The Gold Standard for <br /><span>Type Approval in Yemen</span>
           </h1>
           <p
-            data-en="Continental helps manufacturers and importers prepare, review, and follow Type Approval files with confidence, from technical documents to authority-ready submissions."
-            data-ar="تساعد كونتيننتال المصنعين والمستوردين على تجهيز ومراجعة ومتابعة ملفات اعتماد النوع بثقة، من الوثائق الفنية حتى ملف جاهز للتقديم للجهة المختصة."
+            data-en="Expert Type Approval and regulatory compliance services since 2021. Bridging global manufacturers with the local requirements of Yemen."
+            data-ar="خدمات احترافية في اعتماد النوع والامتثال التنظيمي منذ عام 2021. نربط المصنعين العالميين بالمتطلبات المحلية في اليمن."
           >
-            Continental helps manufacturers and importers prepare, review, and
-            follow Type Approval files with confidence, from technical documents
-            to authority-ready submissions.
+            Expert Type Approval and regulatory compliance services since 2021.
+            Bridging global manufacturers with the local requirements of Yemen.
           </p>
           <div class="hero-btns">
             <a
               href="javascript:void(0)"
               class="btn"
               onclick="openModal()"
-              data-en="Request a Quote"
-              data-ar="طلب تسعيرة"
-              >Request a Quote</a
+              data-en="Secure Your Approval"
+              data-ar="احصل على اعتمادك"
+              >Secure Your Approval</a
             >
             <a
               href="#about"
@@ -400,32 +381,32 @@
                 border: 2px solid var(--primary);
                 color: var(--primary);
               "
-              data-en="Explore Our Services"
-              data-ar="استعرض خدماتنا"
-              >Explore Our Services</a
+              data-en="Learn More"
+              data-ar="تعرف علينا"
+              >Learn More</a
             >
           </div>
           <div class="stats reveal">
             <div class="stat">
-              <h2 class="counter" data-target="700">700+</h2>
+              <h2 class="counter" data-target="700">0</h2>
               <p data-en="Certificates Issued" data-ar="شهادة صادرة">
                 Certificates Issued
               </p>
             </div>
             <div class="stat">
-              <h2 class="counter" data-target="50">50+</h2>
+              <h2 class="counter" data-target="50">0</h2>
               <p data-en="Major Manufacturers" data-ar="شركة مصنعة كبرى">
                 Major Manufacturers
               </p>
             </div>
             <div class="stat">
-              <h2 class="counter" data-target="100">100+</h2>
+              <h2 class="counter" data-target="100">0</h2>
               <p data-en="Success Rate %" data-ar="نسبة النجاح %">
                 Success Rate %
               </p>
             </div>
             <div class="stat">
-              <h2 class="counter" data-target="5">5+</h2>
+              <h2 class="counter" data-target="5">0</h2>
               <p data-en="Years of Expertise" data-ar="سنوات خبرة">
                 Years of Expertise
               </p>
@@ -636,80 +617,6 @@
         </div>
       </section>
 
-      <section id="process" class="service-process-section">
-        <div class="section-title reveal">
-          <h2 data-en="How We Handle Your File" data-ar="كيف نتابع ملفك">
-            How We Handle Your File
-          </h2>
-          <p
-            style="margin-top: 10px; opacity: 0.8"
-            data-en="A clear workflow from first review to approval-ready submission"
-            data-ar="مسار واضح من المراجعة الأولى حتى تجهيز ملف جاهز للتقديم"
-          >
-            A clear workflow from first review to approval-ready submission
-          </p>
-          <div></div>
-        </div>
-        <div class="process-timeline reveal">
-          <article class="process-step">
-            <span class="step-number">01</span>
-            <i class="fas fa-inbox"></i>
-            <h3 data-en="Receive Device Details" data-ar="استلام بيانات الجهاز">
-              Receive Device Details
-            </h3>
-            <p
-              data-en="We review the model, technology, intended use, and available certificates before defining the best submission path."
-              data-ar="نراجع الموديل والتقنية والاستخدام المقصود والشهادات المتوفرة قبل تحديد مسار التقديم الأنسب."
-            >
-              We review the model, technology, intended use, and available
-              certificates before defining the best submission path.
-            </p>
-          </article>
-          <article class="process-step">
-            <span class="step-number">02</span>
-            <i class="fas fa-clipboard-list"></i>
-            <h3 data-en="Check Requirements" data-ar="تحديد المتطلبات">
-              Check Requirements
-            </h3>
-            <p
-              data-en="We identify the required reports, forms, authorization letters, manuals, photos, and technical documents."
-              data-ar="نحدد التقارير والنماذج وخطابات التفويض والأدلة والصور والوثائق الفنية المطلوبة."
-            >
-              We identify the required reports, forms, authorization letters,
-              manuals, photos, and technical documents.
-            </p>
-          </article>
-          <article class="process-step">
-            <span class="step-number">03</span>
-            <i class="fas fa-folder-check"></i>
-            <h3 data-en="Prepare the Application" data-ar="تجهيز ملف الطلب">
-              Prepare the Application
-            </h3>
-            <p
-              data-en="We organize the file, review consistency, and prepare the application package for authority review."
-              data-ar="ننظم الملف ونراجع اتساق الوثائق ونجهز حزمة الطلب لمراجعة الجهة المختصة."
-            >
-              We organize the file, review consistency, and prepare the
-              application package for authority review.
-            </p>
-          </article>
-          <article class="process-step">
-            <span class="step-number">04</span>
-            <i class="fas fa-comments"></i>
-            <h3 data-en="Follow Up Until Approval" data-ar="المتابعة حتى الاعتماد">
-              Follow Up Until Approval
-            </h3>
-            <p
-              data-en="We track comments, coordinate clarifications, and keep the file moving until the approval process is completed."
-              data-ar="نتابع الملاحظات وننسق التوضيحات ونحافظ على سير الملف حتى اكتمال إجراءات الاعتماد."
-            >
-              We track comments, coordinate clarifications, and keep the file
-              moving until the approval process is completed.
-            </p>
-          </article>
-        </div>
-      </section>
-
       <section id="services">
         <div class="section-title reveal">
           <h2 data-en="Our Solutions" data-ar="حلولنا">Our Solutions</h2>
@@ -753,77 +660,6 @@
               requirements, and market-readiness follow-up.
             </p>
           </div>
-        </div>
-      </section>
-
-      <section id="audience-devices" class="audience-devices-section">
-        <div class="section-title reveal">
-          <h2 data-en="Who We Support" data-ar="لمن نقدم خدماتنا">
-            Who We Support
-          </h2>
-          <p
-            style="margin-top: 10px; opacity: 0.8"
-            data-en="Practical regulatory support for technology businesses entering the Yemeni market"
-            data-ar="دعم تنظيمي عملي للشركات التقنية الراغبة في دخول السوق اليمني"
-          >
-            Practical regulatory support for technology businesses entering the
-            Yemeni market
-          </p>
-          <div></div>
-        </div>
-        <div class="audience-grid reveal">
-          <article>
-            <i class="fas fa-industry"></i>
-            <h3 data-en="Manufacturers" data-ar="المصنعون">Manufacturers</h3>
-            <p
-              data-en="Support for global brands preparing telecom and wireless products for Yemen."
-              data-ar="دعم للعلامات العالمية التي تجهز منتجات الاتصالات واللاسلكي للسوق اليمني."
-            >
-              Support for global brands preparing telecom and wireless products
-              for Yemen.
-            </p>
-          </article>
-          <article>
-            <i class="fas fa-ship"></i>
-            <h3 data-en="Importers" data-ar="المستوردون">Importers</h3>
-            <p
-              data-en="Guidance for local importers who need clear documents before shipment or market entry."
-              data-ar="إرشاد للمستوردين المحليين الذين يحتاجون وثائق واضحة قبل الشحن أو دخول السوق."
-            >
-              Guidance for local importers who need clear documents before
-              shipment or market entry.
-            </p>
-          </article>
-          <article>
-            <i class="fas fa-network-wired"></i>
-            <h3 data-en="Technology Distributors" data-ar="موزعو التقنية">
-              Technology Distributors
-            </h3>
-            <p
-              data-en="Follow-up for distributors managing multiple models, renewals, and product changes."
-              data-ar="متابعة للموزعين الذين يديرون عدة موديلات وتجديدات وتغييرات في المنتجات."
-            >
-              Follow-up for distributors managing multiple models, renewals,
-              and product changes.
-            </p>
-          </article>
-        </div>
-
-        <div class="section-title compact-title reveal">
-          <h2 data-en="Devices We Cover" data-ar="الأجهزة التي نغطيها">
-            Devices We Cover
-          </h2>
-          <div></div>
-        </div>
-        <div class="device-list reveal">
-          <span><i class="fas fa-mobile-screen"></i><b data-en="Mobile phones" data-ar="الهواتف">Mobile phones</b></span>
-          <span><i class="fas fa-wifi"></i><b data-en="Routers & Wi-Fi" data-ar="الراوترات وWi-Fi">Routers & Wi-Fi</b></span>
-          <span><i class="fab fa-bluetooth-b"></i><b data-en="Bluetooth devices" data-ar="أجهزة Bluetooth">Bluetooth devices</b></span>
-          <span><i class="fas fa-microchip"></i><b data-en="IoT devices" data-ar="أجهزة IoT">IoT devices</b></span>
-          <span><i class="fas fa-video"></i><b data-en="Wireless cameras" data-ar="الكاميرات اللاسلكية">Wireless cameras</b></span>
-          <span><i class="fas fa-location-crosshairs"></i><b data-en="GPS trackers" data-ar="أجهزة التتبع GPS">GPS trackers</b></span>
-          <span><i class="fas fa-satellite"></i><b data-en="Satellite equipment" data-ar="أجهزة الأقمار الصناعية">Satellite equipment</b></span>
-          <span><i class="fas fa-tower-broadcast"></i><b data-en="Radio equipment" data-ar="أجهزة الراديو">Radio equipment</b></span>
         </div>
       </section>
 
@@ -1568,6 +1404,46 @@
               >
             </p>
           </div>
+          <div class="footer-contact developer-contact">
+            <div class="developer-card-head">
+              <div class="developer-avatar" aria-hidden="true">AA</div>
+              <div>
+                <h4 data-en="Developer" data-ar="المبرمج">Developer</h4>
+                <strong data-en="Ayman Abdullah" data-ar="ايمن عبدالله"
+                  >Ayman Abdullah</strong
+                >
+                <span
+                  data-en="Website design and programming"
+                  data-ar="تصميم وبرمجة الموقع"
+                  >Website design and programming</span
+                >
+              </div>
+            </div>
+            <div class="developer-links">
+              <a href="tel:+967779299051"
+                ><i class="fas fa-phone"></i><span>+967 779299051</span></a
+              >
+              <a href="mailto:aymnalmmry06@gmail.com"
+                ><i class="fas fa-envelope"></i
+                ><span>aymnalmmry06@gmail.com</span></a
+              >
+              <a
+                href="https://ayman-po.netlify.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><i class="fas fa-globe"></i
+                ><span data-en="Personal Website" data-ar="الموقع الشخصي"
+                  >Personal Website</span
+                ></a
+              >
+              <a
+                href="https://www.linkedin.com/in/ayman-abdullah-522151372?utm_source=share_via&amp;utm_content=profile&amp;utm_medium=member_android"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><i class="fab fa-linkedin"></i><span>LinkedIn</span></a
+              >
+            </div>
+          </div>
         </div>
         <div class="footer-bottom">
           <p
@@ -1576,21 +1452,6 @@
           >
             © 2026 Continental for Business Completion Services. All Rights
             Reserved.
-          </p>
-          <p class="footer-credit">
-            <span
-              data-en="Website programmed by"
-              data-ar="تمت برمجة الموقع بواسطة"
-              >Website programmed by</span
-            >
-            <a
-              href="https://ayman-po.netlify.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-en="Ayman Abdullah"
-              data-ar="أيمن عبدالله"
-              >Ayman Abdullah</a
-            >
           </p>
         </div>
       </footer>
@@ -1698,6 +1559,6 @@
       defer
       src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"
     ></script>
-    <script defer src="app.js?v=10"></script>
+    <script defer src="app.js"></script>
   </body>
 </html>

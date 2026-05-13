@@ -1,4 +1,4 @@
-const CACHE_NAME = "continental-site-v10-20260513";
+const CACHE_NAME = "continental-site-v1";
 const CORE_ASSETS = [
   "./",
   "./index.html",
@@ -36,22 +36,10 @@ self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
 
   const request = event.request;
-  const url = new URL(request.url);
-  const isLocalAsset = url.origin === self.location.origin;
-  const isFreshAsset =
-    isLocalAsset &&
-    (request.mode === "navigate" ||
-      ["document", "style", "script", "worker"].includes(request.destination));
 
-  if (isFreshAsset) {
+  if (request.mode === "navigate") {
     event.respondWith(
-      fetch(request)
-        .then((response) => {
-          const copy = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
-          return response;
-        })
-        .catch(() => caches.match(request).then((cached) => cached || caches.match("./index.html"))),
+      fetch(request).catch(() => caches.match("./index.html")),
     );
     return;
   }
