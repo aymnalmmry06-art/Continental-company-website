@@ -125,7 +125,7 @@ function registerServiceWorker() {
   if (!("serviceWorker" in navigator)) return;
 
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("sw.js?v=9").catch(() => {});
+    navigator.serviceWorker.register("sw.js?v=10").catch(() => {});
   });
 }
 
@@ -594,7 +594,7 @@ function renderNews() {
     const newsRef = database.ref(path);
     activeNewsRefs.push(newsRef);
 
-    newsRef.orderByChild("timestamp").limitToLast(12).on(
+    newsRef.limitToLast(12).on(
       "value",
       (snapshot) => {
         if (snapshot.exists()) {
@@ -734,6 +734,12 @@ const pageSections = navLinks
   .filter(Boolean);
 let ticking = false;
 
+function updateBackToTopVisibility() {
+  if (backToTop) {
+    backToTop.classList.toggle("is-visible", window.pageYOffset > 160);
+  }
+}
+
 function updateActiveNavLink() {
   const anchorLine = window.scrollY + Math.max(120, window.innerHeight * 0.22);
   let activeSection = pageSections[0];
@@ -751,10 +757,7 @@ function updateActiveNavLink() {
 window.addEventListener("scroll", () => {
   if (!ticking) {
     window.requestAnimationFrame(() => {
-      if (backToTop) {
-        backToTop.classList.toggle("is-visible", window.pageYOffset > 400);
-      }
-
+      updateBackToTopVisibility();
       if (window.scrollY > 50) {
         if (header) header.classList.add("scrolled");
       } else {
@@ -767,6 +770,7 @@ window.addEventListener("scroll", () => {
   }
 });
 
+updateBackToTopVisibility();
 updateActiveNavLink();
 
 if (backToTop) {

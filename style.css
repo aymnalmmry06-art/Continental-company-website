@@ -4800,7 +4800,4 @@ table {
 
 #backToTop {
   z-index: 2300;
-  opacity: 0.95;
-  pointer-events: auto;
-  transform: translateY(0);
 }
