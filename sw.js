@@ -4,6 +4,8 @@ const CORE_ASSETS = [
   "./index.html",
   "./style.css",
   "./app.js",
+  "./robots.txt",
+  "./sitemap.xml",
   "./logo.png",
   "./ministry.png",
   "./form.jpg",
