@@ -990,6 +990,27 @@ body.light .faq-answer {
   opacity: 0.6;
 }
 
+.footer-credit {
+  margin-top: 10px;
+  font-size: 0.82rem;
+  opacity: 0.78;
+}
+
+.footer-credit a {
+  color: #9fb8ff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.footer-credit a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+[dir="rtl"] .footer-credit {
+  direction: rtl;
+}
+
 /* UTILS */
 .whatsapp-btn {
   position: fixed;
